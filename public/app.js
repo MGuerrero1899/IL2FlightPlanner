@@ -55,7 +55,7 @@ let bluTrainIcon = L.icon({
 })
 let bluBrdgeIcon = L.icon({
     iconUrl: '/public/dist/icons/bluebridge.png',
-    iconSize: [40,40]
+    iconSize: [45,45]
 })
 let bluDepotIcon = L.icon({
     iconUrl: '/public/dist/icons/bluedepot.png',
@@ -79,7 +79,7 @@ let redDepotIcon = L.icon({
 })
 let redBrdgeIcon = L.icon({
     iconUrl: '/public/dist/icons/redbridge.png',
-    iconSize: [40,40]
+    iconSize: [45,45]
 })
 
 const button = document.querySelector('.create')
@@ -283,8 +283,15 @@ function getCustomIcon(serverMarkers){
                     selectIcon = bluDepotIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
-                break;  
-                      
+                break;
+            case 'taw-bridge':
+                if(point.color === 'red'){
+                    selectIcon = redBrdgeIcon
+                }else{
+                    selectIcon = bluBrdgeIcon
+                }
+                createCustomIcon(markerCoords,selectIcon)
+                break;   
             default:
                 console.log("No marker selected")
                 console.log(type)
