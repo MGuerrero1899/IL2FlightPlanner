@@ -210,11 +210,13 @@ async function populateMap(){
         let y = i.latLng.lat
         let x = i.latLng.lng
         let type = i.type
-        //Compares Accepted Type is found in points object
+        //Checks if Accepted Type is found in points object
         if(acceptedTypes.includes(type)){
+            //By default taw-af has no name, so we assign it the name of Airfield
             if(type == 'taw-af'){
                 i.name = 'Airfield'
             }
+            //Pushes values that passed the check as an object to our server markers array
             serverMarkers.push(
                 {
                     lat: y.toFixed(2),
@@ -223,22 +225,24 @@ async function populateMap(){
                     color: i.color,
                     name: i.name,
                     notes: i.notes,
-                    jsonLat: i.latLng.lat,
-                    jsonLng: i.latLng.lng
                 })
         }
     })
     drawFrontline(data)
-    createServerIcons(serverMarkers)
+    getCustomIcon(serverMarkers)
   }
-function createServerIcons(serverMarkers){
+//Assigns a custom icon based off of serverMarkers value
+function getCustomIcon(serverMarkers){
     serverMarkers.forEach(point => {
+        //Converts server json lat,lng to its respective lat,lng on the map
         let y = point.lat
         let x= point.lng
         let markerCoords = convertServerToMap(y,x)
+        //Determines what type of marker the coordinates are
         let type = point.type
+        //Pre Declaring selectIcon (Will be updated with a value in the switch statement)
         let selectIcon
-
+        //Determines what type of icon to give the marker
         switch (type) {
             case 'taw-af':
                 if(point.color === 'red'){
@@ -246,7 +250,7 @@ function createServerIcons(serverMarkers){
                 }else{
                     selectIcon = bluAFIcon
                 }
-                customIcon(markerCoords,selectIcon)
+                createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-def':
                 if(point.color === 'red'){
@@ -254,7 +258,7 @@ function createServerIcons(serverMarkers){
                 }else{
                     selectIcon = bluTrpIcon
                 }
-                customIcon(markerCoords,selectIcon)
+                createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'base':
                 if(point.color === 'red'){
@@ -262,7 +266,7 @@ function createServerIcons(serverMarkers){
                 }else{
                     selectIcon = bluDepotIcon
                 }
-                customIcon(markerCoords,selectIcon)
+                createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-train':
                 if(point.color === 'red'){
@@ -270,7 +274,7 @@ function createServerIcons(serverMarkers){
                 }else{
                     selectIcon = bluTrainIcon
                 }
-                customIcon(markerCoords,selectIcon)
+                createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-depo':
                 if(point.color === 'red'){
@@ -278,16 +282,18 @@ function createServerIcons(serverMarkers){
                 }else{
                     selectIcon = bluDepotIcon
                 }
-                customIcon(markerCoords,selectIcon)
-                break;
-                        
+                createCustomIcon(markerCoords,selectIcon)
+                break;  
+                      
             default:
+                console.log("No marker selected")
+                console.log(type)
                 break;
         }
     })
 }
-
-function customIcon(markerCoords,selectIcon){
+//Creates a marker with a custom icon for getCustomIcon()
+function createCustomIcon(markerCoords,selectIcon){
     new L.marker(markerCoords,{
         icon: selectIcon,
         interactive:false
