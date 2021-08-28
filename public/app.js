@@ -143,13 +143,15 @@ map.on('click',(e) => {
             let heading = calcHeading(a,b)
             let distance = calculateDistance(a,b)
             //Creates a transparent marker for the midpoint and sets text to display heading and distance
-            new L.marker(midpoint,{
-                opacity: 1,
-                icon: L.divIcon({
-                    className: 'midpoint-label',
-                    html: `<b>${heading}°|${distance}km</b>`
-            })
-            }).addTo(map)
+            if(distance > 2){
+                new L.marker(midpoint,{
+                    opacity: 1,
+                    icon: L.divIcon({
+                        className: 'midpoint-label',
+                        html: `<b>${heading}°|${distance}km</b>`
+                    })
+                }).addTo(map)
+            }
         }
     }
 })
