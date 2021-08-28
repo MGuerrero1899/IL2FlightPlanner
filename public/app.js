@@ -41,6 +41,47 @@ const mapSettings = {
     },
 }
 
+let bluAFIcon = L.icon({
+    iconUrl: '/public/dist/icons/blueairfield.png',
+    iconSize: [30,30]
+})
+let bluTrpIcon = L.icon({
+    iconUrl: '/public/dist/icons/bluefronttroops.png',
+    iconSize: [40,40]
+})
+let bluTrainIcon = L.icon({
+    iconUrl: '/public/dist/icons/bluetrain.png',
+    iconSize: [75,75]
+})
+let bluBrdgeIcon = L.icon({
+    iconUrl: '/public/dist/icons/bluebridge.png',
+    iconSize: [40,40]
+})
+let bluDepotIcon = L.icon({
+    iconUrl: '/public/dist/icons/bluedepot.png',
+    iconSize: [50,50]
+})
+let redAFIcon = L.icon({
+    iconUrl: '/public/dist/icons/redairfield.png',
+    iconSize: [30,30]
+})
+let redTrpIcon = L.icon({
+    iconUrl: '/public/dist/icons/redfronttroops.png',
+    iconSize: [40,40]
+})
+let redTrainIcon = L.icon({
+    iconUrl: '/public/dist/icons/redtrain.png',
+    iconSize: [75,75]
+})
+let redDepotIcon = L.icon({
+    iconUrl: '/public/dist/icons/reddepot.png',
+    iconSize: [50,50]
+})
+let redBrdgeIcon = L.icon({
+    iconUrl: '/public/dist/icons/redbridge.png',
+    iconSize: [40,40]
+})
+
 const button = document.querySelector('.create')
 
 //Selected Map Index
@@ -165,17 +206,17 @@ async function populateMap(){
       let serverMarkers = []
       //Loops through points object from servers json
       data.points.forEach(i => {
-        let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base']
+        let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base','taw-train']
         let y = i.latLng.lat
         let x = i.latLng.lng
         let type = i.type
         //Compares Accepted Type is found in points object
         if(acceptedTypes.includes(type)){
-            let mapCoords = convertServerToMap(y,x)
+            //let mapCoords = convertServerToMap(y,x)
             if(type == 'taw-af'){
                 i.name = 'Airfield'
             }
-            new L.marker(mapCoords).bindPopup(i.name).addTo(map)
+            //new L.marker(mapCoords).bindPopup(i.name).addTo(map)
             serverMarkers.push(
                 {
                     lat: y.toFixed(2),
@@ -189,8 +230,75 @@ async function populateMap(){
                 })
         }
     })
+    console.log(serverMarkers)
     drawFrontline(data)
+    createServerIcons(serverMarkers)
   }
+function createServerIcons(serverMarkers){
+    serverMarkers.forEach(point => {
+        let y = point.lat
+        let x= point.lng
+        let markerCoords = convertServerToMap(y,x)
+        let type = point.type
+        let selectIcon
+
+        switch (type) {
+            case 'taw-af':
+                if(point.color === 'red'){
+                    selectIcon = redAFIcon
+                }else{
+                    selectIcon = bluAFIcon
+                }
+                customIcon(markerCoords,selectIcon)
+                break;
+            case 'taw-def':
+                if(point.color === 'red'){
+                    selectIcon = redTrpIcon
+                }else{
+                    selectIcon = bluTrpIcon
+                }
+                customIcon(markerCoords,selectIcon)
+                break;
+            case 'base':
+                if(point.color === 'red'){
+                    selectIcon = redDepotIcon
+                }else{
+                    selectIcon = bluDepotIcon
+                }
+                customIcon(markerCoords,selectIcon)
+                break;
+            case 'taw-train':
+                if(point.color === 'red'){
+                    selectIcon = redTrainIcon
+                }else{
+                    selectIcon = bluTrainIcon
+                }
+                customIcon(markerCoords,selectIcon)
+                break;
+            case 'taw-depo':
+                if(point.color === 'red'){
+                    selectIcon = redDepotIcon
+                }else{
+                    selectIcon = bluDepotIcon
+                }
+                customIcon(markerCoords,selectIcon)
+                break;
+                        
+            default:
+                break;
+        }
+
+        console.log(y,x)
+    })
+}
+
+function customIcon(markerCoords,selectIcon){
+    new L.marker(markerCoords,{
+        icon: selectIcon,
+        interactive:false
+    }).addTo(map)
+}
+
 //Uses passed data from the server to draw the frontline
 function drawFrontline(data){
     data.frontline.forEach(frontline => {
@@ -207,10 +315,11 @@ function drawFrontline(data){
             blueFrontline.push(blueCoords)
             //Creates marker at blue coordinate and adds to map
             new L.marker(blueCoords,{
-                opacity: 0
+                opacity: 0,
+                interactive:false
             }).addTo(map)
             //Connects all blueFrontline coordinates together with a polyline
-            L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3}).addTo(map)
+            L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3,interactive:false}).addTo(map)
         })
 
         //Red Allied Frontline
@@ -223,10 +332,11 @@ function drawFrontline(data){
             redFrontline.push(redCoords)
             //Creates marker at red coordinate and adds to map
             new L.marker(redCoords,{
-                opacity: 0
+                opacity: 0,
+                interactive:false
             }).addTo(map)
             //Connects all redFrontline coordinates together with a polyline
-            L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3}).addTo(map)
+            L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3,interactive:false}).addTo(map)
         })
    })
 }
