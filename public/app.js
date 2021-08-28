@@ -44,7 +44,7 @@ const mapSettings = {
 //Declare Icons
 const bluAFIcon = L.icon({
     iconUrl: '/public/dist/icons/blueairfield.png',
-    iconSize: [30,30]
+    iconSize: [35,35]
 })
 const bluTrpIcon = L.icon({
     iconUrl: '/public/dist/icons/bluefronttroops.png',
@@ -64,7 +64,7 @@ const bluDepotIcon = L.icon({
 })
 const redAFIcon = L.icon({
     iconUrl: '/public/dist/icons/redairfield.png',
-    iconSize: [30,30]
+    iconSize: [35,35]
 })
 const redTrpIcon = L.icon({
     iconUrl: '/public/dist/icons/redfronttroops.png',
