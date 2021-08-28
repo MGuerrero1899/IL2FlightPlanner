@@ -212,11 +212,9 @@ async function populateMap(){
         let type = i.type
         //Compares Accepted Type is found in points object
         if(acceptedTypes.includes(type)){
-            //let mapCoords = convertServerToMap(y,x)
             if(type == 'taw-af'){
                 i.name = 'Airfield'
             }
-            //new L.marker(mapCoords).bindPopup(i.name).addTo(map)
             serverMarkers.push(
                 {
                     lat: y.toFixed(2),
@@ -230,7 +228,6 @@ async function populateMap(){
                 })
         }
     })
-    console.log(serverMarkers)
     drawFrontline(data)
     createServerIcons(serverMarkers)
   }
@@ -287,8 +284,6 @@ function createServerIcons(serverMarkers){
             default:
                 break;
         }
-
-        console.log(y,x)
     })
 }
 
@@ -341,4 +336,3 @@ function drawFrontline(data){
    })
 }
 
-//console.log(serverPoints)
