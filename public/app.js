@@ -146,4 +146,89 @@ function calculateDistance(a,b){
     let distance = Math.sqrt(x*x + y*y)
     return distance.toFixed(2)
 }
+  //Converts Server JSON (lat,lng) points to respective point on map
+  function convertServerToMap(y,x){
+    y -= 192.1;
+    y *= 1.33333333333333;
+    x *= 1.33333333333333;
+    return [y,x]
+}
 
+
+//Parses Server json and populates map accordingly
+let serverPoints = populateMap()
+
+//Parse JSON and add markers to map
+async function populateMap(){
+      const res = await fetch('output.json')
+      const data = await res.json()
+      let serverMarkers = []
+      //Loops through points object from servers json
+      data.points.forEach(i => {
+        let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base']
+        let y = i.latLng.lat
+        let x = i.latLng.lng
+        let type = i.type
+        //Compares Accepted Type is found in points object
+        if(acceptedTypes.includes(type)){
+            let mapCoords = convertServerToMap(y,x)
+            if(type == 'taw-af'){
+                i.name = 'Airfield'
+            }
+            new L.marker(mapCoords).bindPopup(i.name).addTo(map)
+            serverMarkers.push(
+                {
+                    lat: y.toFixed(2),
+                    lng: x.toFixed(2),
+                    type: i.type,
+                    color: i.color,
+                    name: i.name,
+                    notes: i.notes,
+                    jsonLat: i.latLng.lat,
+                    jsonLng: i.latLng.lng
+                })
+        }
+    })
+    drawFrontline(data)
+  }
+//Uses passed data from the server to draw the frontline
+function drawFrontline(data){
+    data.frontline.forEach(frontline => {
+        let blueFrontline = []
+        let redFrontline = []
+
+        //Blue Axis Frontline
+        frontline[0].forEach(coords => {
+            let y = coords[0]
+            let x = coords[1]
+            //Converts JSON Frontline Coordinates to respective Map Coordinates
+            let blueCoords = convertServerToMap(y,x)
+            //Pushes coordinates to Blue Frontline Array
+            blueFrontline.push(blueCoords)
+            //Creates marker at blue coordinate and adds to map
+            new L.marker(blueCoords,{
+                opacity: 0
+            }).addTo(map)
+            //Connects all blueFrontline coordinates together with a polyline
+            L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3}).addTo(map)
+        })
+
+        //Red Allied Frontline
+        frontline[1].forEach(coords => {
+            let y = coords[0]
+            let x = coords[1]
+            //Converts JSON Frontline Coordinates to respective Map Coordinates
+            let redCoords = convertServerToMap(y,x)
+            //Pushes coordinates to Red Frontline Array
+            redFrontline.push(redCoords)
+            //Creates marker at red coordinate and adds to map
+            new L.marker(redCoords,{
+                opacity: 0
+            }).addTo(map)
+            //Connects all redFrontline coordinates together with a polyline
+            L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3}).addTo(map)
+        })
+   })
+}
+
+//console.log(serverPoints)
