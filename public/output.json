@@ -361,7 +361,7 @@
         "lat": 29.41431818181818,
         "lng": 65.74977272727273
       },
-      "name": "Bridge",
+      "name": "DESTROYED",
       "type": "taw-bridge",
       "color": "blue",
       "notes": ""
@@ -420,6 +420,16 @@
       "latLng": {
         "lat": 8.447045454545455,
         "lng": 70.73522727272727
+      },
+      "name": "",
+      "type": "taw-af",
+      "color": "blue",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 72.41113636363636,
+        "lng": 156.14590909090907
       },
       "name": "",
       "type": "taw-af",
@@ -510,26 +520,6 @@
       "latLng": {
         "lat": 63.62522727272727,
         "lng": 136.18772727272727
-      },
-      "name": "Front depot",
-      "type": "taw-depo",
-      "color": "blue",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 18.968863636363636,
-        "lng": 18.151363636363637
-      },
-      "name": "Rear depot",
-      "type": "base",
-      "color": "blue",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 23.32840909090909,
-        "lng": 79.6875
       },
       "name": "Front depot",
       "type": "taw-depo",
@@ -648,58 +638,18 @@
     },
     {
       "latLng": {
-        "lat": 120.95877484090911,
-        "lng": 140.05091931818183
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 78.79553802272727,
-        "lng": 125.34403704545454
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 121.14292970454545,
-        "lng": 140.00187136363638
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 82.61443356818182,
-        "lng": 129.16398750000002
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 36.572146636363634,
-        "lng": 63.93748909090909
+        "lat": 35.00805838636364,
+        "lng": 63.59014500000001
       },
       "name": "",
       "type": "combat",
       "color": "black",
-      "notes": "\u003dSqSq\u003dratatouille96 detroyed Demon_Warlock"
+      "notes": "Yak_Panther detroyed Ramulon_VR"
     },
     {
       "latLng": {
-        "lat": 41.90791990909091,
-        "lng": 53.720811136363636
+        "lat": 23.31815781818182,
+        "lng": 79.72617681818181
       },
       "name": "",
       "type": "ground-combat",
@@ -708,8 +658,8 @@
     },
     {
       "latLng": {
-        "lat": 81.7814808409091,
-        "lng": 129.62686772727272
+        "lat": 23.33367190909091,
+        "lng": 79.6463775
       },
       "name": "",
       "type": "ground-combat",
@@ -718,8 +668,8 @@
     },
     {
       "latLng": {
-        "lat": 41.766802227272734,
-        "lng": 53.692606363636365
+        "lat": 23.325767045454548,
+        "lng": 79.66129227272728
       },
       "name": "",
       "type": "ground-combat",
@@ -728,8 +678,8 @@
     },
     {
       "latLng": {
-        "lat": 41.90791990909091,
-        "lng": 53.720811136363636
+        "lat": 36.72853336363636,
+        "lng": 64.08955022727272
       },
       "name": "",
       "type": "ground-combat",
@@ -738,18 +688,18 @@
     },
     {
       "latLng": {
-        "lat": 49.356178977272734,
-        "lng": 131.0159440909091
+        "lat": 31.279160181818185,
+        "lng": 70.7587765909091
       },
       "name": "",
       "type": "combat",
       "color": "black",
-      "notes": "Ryanair_Bulwolf detroyed kodam"
+      "notes": "69th_CrConrado detroyed Demon_Warlock"
     },
     {
       "latLng": {
-        "lat": 41.84709961363636,
-        "lng": 53.66564249999999
+        "lat": 23.332923477272725,
+        "lng": 79.66600636363636
       },
       "name": "",
       "type": "ground-combat",
@@ -758,8 +708,8 @@
     },
     {
       "latLng": {
-        "lat": 81.95793327272727,
-        "lng": 129.7061393181818
+        "lat": 23.350525568181816,
+        "lng": 79.71325431818181
       },
       "name": "",
       "type": "ground-combat",
@@ -768,33 +718,73 @@
     },
     {
       "latLng": {
-        "lat": 42.70861684090909,
-        "lng": 51.68816727272727
+        "lat": 34.13552556818182,
+        "lng": 56.372018181818184
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 23.33352538636364,
+        "lng": 79.64517340909092
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 23.289180545454546,
+        "lng": 79.6855234090909
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 23.33367190909091,
+        "lng": 79.6463775
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 23.28716706818182,
+        "lng": 79.71748909090908
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 23.284583659090906,
+        "lng": 79.74068659090909
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 48.19822268181818,
+        "lng": 128.9265975
       },
       "name": "",
       "type": "combat",
       "color": "black",
-      "notes": "kentspatton detroyed kentspatton"
-    },
-    {
-      "latLng": {
-        "lat": 41.80470702272727,
-        "lng": 53.66814613636364
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 81.44930222727272,
-        "lng": 128.8523434090909
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
+      "notes": "15[Span.]/JG51Navarro detroyed smowbordsmowbord"
     }
   ]
 }

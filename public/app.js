@@ -41,43 +41,44 @@ const mapSettings = {
     },
 }
 
-let bluAFIcon = L.icon({
+//Declare Icons
+const bluAFIcon = L.icon({
     iconUrl: '/public/dist/icons/blueairfield.png',
     iconSize: [30,30]
 })
-let bluTrpIcon = L.icon({
+const bluTrpIcon = L.icon({
     iconUrl: '/public/dist/icons/bluefronttroops.png',
     iconSize: [40,40]
 })
-let bluTrainIcon = L.icon({
+const bluTrainIcon = L.icon({
     iconUrl: '/public/dist/icons/bluetrain.png',
     iconSize: [75,75]
 })
-let bluBrdgeIcon = L.icon({
+const bluBrdgeIcon = L.icon({
     iconUrl: '/public/dist/icons/bluebridge.png',
     iconSize: [45,45]
 })
-let bluDepotIcon = L.icon({
+const bluDepotIcon = L.icon({
     iconUrl: '/public/dist/icons/bluedepot.png',
     iconSize: [50,50]
 })
-let redAFIcon = L.icon({
+const redAFIcon = L.icon({
     iconUrl: '/public/dist/icons/redairfield.png',
     iconSize: [30,30]
 })
-let redTrpIcon = L.icon({
+const redTrpIcon = L.icon({
     iconUrl: '/public/dist/icons/redfronttroops.png',
     iconSize: [40,40]
 })
-let redTrainIcon = L.icon({
+const redTrainIcon = L.icon({
     iconUrl: '/public/dist/icons/redtrain.png',
     iconSize: [75,75]
 })
-let redDepotIcon = L.icon({
+const redDepotIcon = L.icon({
     iconUrl: '/public/dist/icons/reddepot.png',
     iconSize: [50,50]
 })
-let redBrdgeIcon = L.icon({
+const redBrdgeIcon = L.icon({
     iconUrl: '/public/dist/icons/redbridge.png',
     iconSize: [45,45]
 })
@@ -130,7 +131,6 @@ map.on('click',(e) => {
         lng: e.latlng.lng,
     }
     markerCoords.push(marker)
-    console.log(marker)
     //Adds a polyline to connect each point
     const polyline = L.polyline(markerCoords, {color: 'red'}).addTo(map)
     //Determines if there are atleast two marker points on map
@@ -142,7 +142,6 @@ map.on('click',(e) => {
             let midpoint = calcMidPoint(a,b)
             let heading = calcHeading(a,b)
             let distance = calculateDistance(a,b)
-
             //Creates a transparent marker for the midpoint and sets text to display heading and distance
             new L.marker(midpoint,{
                 opacity: 1,
@@ -236,12 +235,18 @@ function getCustomIcon(serverMarkers){
     serverMarkers.forEach(point => {
         //Converts server json lat,lng to its respective lat,lng on the map
         let y = point.lat
-        let x= point.lng
+        let x = point.lng
         let markerCoords = convertServerToMap(y,x)
+        let labelCoords = markerCoords
         //Determines what type of marker the coordinates are
         let type = point.type
+        let name = point.name.toUpperCase()
         //Pre Declaring selectIcon (Will be updated with a value in the switch statement)
         let selectIcon
+        if(point.name != 'DESTROYED'){
+            if(type != 'taw-af'){
+                createLabel(labelCoords,name)
+            }
         //Determines what type of icon to give the marker
         switch (type) {
             case 'taw-af':
@@ -297,12 +302,23 @@ function getCustomIcon(serverMarkers){
                 console.log(type)
                 break;
         }
+        }
     })
 }
 //Creates a marker with a custom icon for getCustomIcon()
 function createCustomIcon(markerCoords,selectIcon){
     new L.marker(markerCoords,{
         icon: selectIcon,
+        interactive:false
+    }).addTo(map)
+}
+
+function createLabel(labelCoords,name){
+    new L.marker(labelCoords,{
+        icon:L.divIcon({
+            html: `<b>${name}</b>`,
+            className: 'icon-label'
+        }),
         interactive:false
     }).addTo(map)
 }
@@ -323,6 +339,9 @@ function drawFrontline(data){
             blueFrontline.push(blueCoords)
             //Creates marker at blue coordinate and adds to map
             new L.marker(blueCoords,{
+                icon:L.divIcon({
+                    opacity: 0
+                }),
                 opacity: 0,
                 interactive:false
             }).addTo(map)
@@ -340,6 +359,9 @@ function drawFrontline(data){
             redFrontline.push(redCoords)
             //Creates marker at red coordinate and adds to map
             new L.marker(redCoords,{
+                icon:L.divIcon({
+                    opacity: 0
+                }),
                 opacity: 0,
                 interactive:false
             }).addTo(map)
