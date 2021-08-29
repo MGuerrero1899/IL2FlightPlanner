@@ -107,7 +107,8 @@ const redBrdgeIcon = L.icon({
     iconSize: [45,45]
 })
 
-const button = document.querySelector('.create')
+const button = document.querySelector('.recenter');
+const speedInput = document.querySelector('#flightSpeed');
 
 //Selected Map Index
 let mapIndex = mapSettings.Stalingrad
@@ -148,6 +149,9 @@ button.addEventListener('click', () => {
 let markerCoords = []
 //Creates marker based on clicked location of map
 map.on('click',(e) => {
+    //Declares speed as speedInput value (Default value is 300kmph)
+    let speed = speedInput.value;
+    console.log(speed)
     //Creates marker object and pushes it to the marker coordinates array
     new L.marker(e.latlng).addTo(map)
     let marker = {
@@ -165,14 +169,17 @@ map.on('click',(e) => {
             let b = markerCoords[i + 1];
             let midpoint = calcMidPoint(a,b)
             let heading = calcHeading(a,b)
-            let distance = calculateDistance(a,b)
+            let distance = calcDistance(a,b)
+            let time = calcTime(speed,distance)
+            let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`
+            console.log(time)
             //Creates a transparent marker for the midpoint and sets text to display heading and distance
             if(distance > 2){
                 new L.marker(midpoint,{
                     opacity: 1,
                     icon: L.divIcon({
                         className: 'midpoint-label',
-                        html: `<b>${heading}°|${distance}km</b>`
+                        html: `${heading}°|${distance}km|${timeToTarget}`
                     })
                 }).addTo(map)
             }
@@ -206,11 +213,18 @@ function geoToMagnetic(degrees){
     return (450 - degrees) % 360;
 }
 //Calculates the distance between two points on the map
-function calculateDistance(a,b){
+function calcDistance(a,b){
     let x = Math.floor(((b.lat - a.lat)/ mapIndex.latScale) * 10)
     let y = Math.floor(((b.lng - a.lng) / mapIndex.lngScale) * 10)
     let distance = Math.sqrt(x*x + y*y)
     return distance.toFixed(2)
+}
+function calcTime(speed,distance){
+    //Seconds in an Hour
+    const minInHr = 60;
+    let kmPerMin = speed / minInHr;
+    return distance / kmPerMin;
+
 }
   //Converts Server JSON (lat,lng) points to respective point on map
   function convertServerToMap(y,x){
@@ -338,7 +352,7 @@ function createCustomIcon(markerCoords,selectIcon){
         interactive:false
     }).addTo(map)
 }
-
+//Creates a label with the name for the custom icon marker
 function createLabel(labelCoords,name){
     new L.marker(labelCoords,{
         icon:L.divIcon({
