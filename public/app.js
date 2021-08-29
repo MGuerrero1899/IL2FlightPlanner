@@ -16,6 +16,8 @@ const mapSettings = {
         latOffset: 256, //Latitude offset of the map in order to find correct heading (Prevents negative latitude)
         latScale: 9, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
         lngScale: 9, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+        scale: 1.33333333333333,
+        originalSize: 192.1,
         mapCenter:[-128,127],
         tiles: "dist/new_moscow/{z}/{x}/{y}.png" //location of tiles for selected map
     },
@@ -190,9 +192,9 @@ function calculateDistance(a,b){
 }
   //Converts Server JSON (lat,lng) points to respective point on map
   function convertServerToMap(y,x){
-    y -= 192.1;
-    y *= 1.33333333333333;
-    x *= 1.33333333333333;
+    y -= mapIndex.originalSize; //Original Map Latitude Maxmimum
+    y *= mapIndex.scale; //Original vs Leaflet map scale difference
+    x *= mapIndex.scale; //Original vs Leaflet map scale difference
     return [y,x]
 }
 
