@@ -43,43 +43,43 @@ const mapSettings = {
 
 //Declare Icons
 const bluAFIcon = L.icon({
-    iconUrl: '/public/dist/icons/blueairfield.png',
+    iconUrl: './dist/icons/blueairfield.png',
     iconSize: [35,35]
 })
 const bluTrpIcon = L.icon({
-    iconUrl: '/public/dist/icons/bluefronttroops.png',
+    iconUrl: './dist/icons/bluefronttroops.png',
     iconSize: [40,40]
 })
 const bluTrainIcon = L.icon({
-    iconUrl: '/public/dist/icons/bluetrain.png',
+    iconUrl: './dist/icons/bluetrain.png',
     iconSize: [75,75]
 })
 const bluBrdgeIcon = L.icon({
-    iconUrl: '/public/dist/icons/bluebridge.png',
+    iconUrl: './dist/icons/bluebridge.png',
     iconSize: [45,45]
 })
 const bluDepotIcon = L.icon({
-    iconUrl: '/public/dist/icons/bluedepot.png',
+    iconUrl: './dist/icons/bluedepot.png',
     iconSize: [50,50]
 })
 const redAFIcon = L.icon({
-    iconUrl: '/public/dist/icons/redairfield.png',
+    iconUrl: './dist/icons/redairfield.png',
     iconSize: [35,35]
 })
 const redTrpIcon = L.icon({
-    iconUrl: '/public/dist/icons/redfronttroops.png',
+    iconUrl: './dist/icons/redfronttroops.png',
     iconSize: [40,40]
 })
 const redTrainIcon = L.icon({
-    iconUrl: '/public/dist/icons/redtrain.png',
+    iconUrl: './dist/icons/redtrain.png',
     iconSize: [75,75]
 })
 const redDepotIcon = L.icon({
-    iconUrl: '/public/dist/icons/reddepot.png',
+    iconUrl: './dist/icons/reddepot.png',
     iconSize: [50,50]
 })
 const redBrdgeIcon = L.icon({
-    iconUrl: '/public/dist/icons/redbridge.png',
+    iconUrl: './dist/icons/redbridge.png',
     iconSize: [45,45]
 })
 

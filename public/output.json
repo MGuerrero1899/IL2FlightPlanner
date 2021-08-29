@@ -393,7 +393,7 @@
         "lat": 100.17136363636364,
         "lng": 131.19886363636363
       },
-      "name": "Bridge",
+      "name": "DESTROYED",
       "type": "taw-bridge",
       "color": "red",
       "notes": ""
@@ -423,7 +423,7 @@
         "lat": 74.35909090909091,
         "lng": 84.72954545454544
       },
-      "name": "Bridge",
+      "name": "DESTROYED",
       "type": "taw-bridge",
       "color": "red",
       "notes": ""
@@ -462,6 +462,26 @@
       "latLng": {
         "lat": 22.926136363636363,
         "lng": 94.11613636363636
+      },
+      "name": "",
+      "type": "taw-af",
+      "color": "blue",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 79.0690909090909,
+        "lng": 131.28545454545457
+      },
+      "name": "",
+      "type": "taw-af",
+      "color": "blue",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 14.887500000000001,
+        "lng": 73.7775
       },
       "name": "",
       "type": "taw-af",
@@ -510,42 +530,22 @@
     },
     {
       "latLng": {
-        "lat": 42.32454545454545,
-        "lng": 145.28795454545454
+        "lat": 84.15136363636364,
+        "lng": 117.00272727272727
       },
-      "name": "Rear depot",
-      "type": "base",
-      "color": "blue",
+      "name": "",
+      "type": "taw-af",
+      "color": "red",
       "notes": ""
     },
     {
       "latLng": {
-        "lat": 61.5,
-        "lng": 135.89045454545453
+        "lat": 53.88409090909091,
+        "lng": 83.38090909090909
       },
-      "name": "Front depot",
-      "type": "taw-depo",
-      "color": "blue",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 23.570454545454545,
-        "lng": 111.12272727272727
-      },
-      "name": "Rear depot",
-      "type": "base",
-      "color": "blue",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 19.640454545454546,
-        "lng": 64.48431818181818
-      },
-      "name": "Front depot",
-      "type": "taw-depo",
-      "color": "blue",
+      "name": "",
+      "type": "taw-af",
+      "color": "red",
       "notes": ""
     },
     {
@@ -660,38 +660,8 @@
     },
     {
       "latLng": {
-        "lat": 49.44185372727273,
-        "lng": 68.904705
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "Dusty_Steppes detroyed JG4_Freiberg"
-    },
-    {
-      "latLng": {
-        "lat": 53.51750175000001,
-        "lng": 65.52673295454545
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "ACG_Gnomus detroyed Temuri_babu"
-    },
-    {
-      "latLng": {
-        "lat": 40.87124202272727,
-        "lng": 63.97372159090909
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "Demon_Warlock detroyed QB.Gregor-"
-    },
-    {
-      "latLng": {
-        "lat": 114.26474788636364,
-        "lng": 145.47244977272726
+        "lat": 114.19977272727274,
+        "lng": 145.50803249999998
       },
       "name": "",
       "type": "ground-combat",
@@ -700,8 +670,8 @@
     },
     {
       "latLng": {
-        "lat": 114.34690697727271,
-        "lng": 145.47902318181818
+        "lat": 101.6328409090909,
+        "lng": 138.06861818181818
       },
       "name": "",
       "type": "ground-combat",
@@ -710,8 +680,18 @@
     },
     {
       "latLng": {
-        "lat": 114.24235438636364,
-        "lng": 145.55013477272726
+        "lat": 54.45251420454546,
+        "lng": 83.15906727272727
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "III/JG52_Otto_-I- detroyed Halon"
+    },
+    {
+      "latLng": {
+        "lat": 86.13202418181818,
+        "lng": 130.81970863636363
       },
       "name": "",
       "type": "ground-combat",
@@ -720,58 +700,8 @@
     },
     {
       "latLng": {
-        "lat": 40.08859997727272,
-        "lng": 61.615120227272726
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "401GATOR detroyed mistral921"
-    },
-    {
-      "latLng": {
-        "lat": 49.44185372727273,
-        "lng": 68.904705
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "Dusty_Steppes detroyed 6./ZG26_5tuka"
-    },
-    {
-      "latLng": {
-        "lat": 83.27578656818181,
-        "lng": 107.62152681818182
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "Mr_BRRRRRRT detroyed bt7"
-    },
-    {
-      "latLng": {
-        "lat": 48.00995563636363,
-        "lng": 132.00143795454545
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "13/JG5_Luck detroyed IceMan71"
-    },
-    {
-      "latLng": {
-        "lat": 81.07739168181818,
-        "lng": 126.26575977272726
-      },
-      "name": "",
-      "type": "combat",
-      "color": "black",
-      "notes": "SaltyFartBlast85 detroyed Pizarro31"
-    },
-    {
-      "latLng": {
-        "lat": 53.59073331818182,
-        "lng": 64.8641809090909
+        "lat": 86.19761188636363,
+        "lng": 130.87993227272727
       },
       "name": "",
       "type": "ground-combat",
@@ -780,33 +710,103 @@
     },
     {
       "latLng": {
-        "lat": 87.1621075909091,
-        "lng": 122.59218750000001
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 87.17228693181818,
-        "lng": 122.69032636363636
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 53.20852097727273,
-        "lng": 64.11393613636363
+        "lat": 63.475078159090906,
+        "lng": 79.23544363636363
       },
       "name": "",
       "type": "combat",
       "color": "black",
-      "notes": "JG4_Widukind detroyed botboipd"
+      "notes": "[F.Circus]sith1144 detroyed III/JG52_Lucho"
+    },
+    {
+      "latLng": {
+        "lat": 61.50060190909091,
+        "lng": 135.8328722727273
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 99.45698863636363,
+        "lng": 137.0554575
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "\u003dABr\u003d422nd_RedSkull detroyed 401Berdoo"
+    },
+    {
+      "latLng": {
+        "lat": 53.725488272727276,
+        "lng": 83.8443640909091
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "USAF-Iceman_VR detroyed III/JG52_Supongo"
+    },
+    {
+      "latLng": {
+        "lat": 63.757169727272725,
+        "lng": 79.88719772727272
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 101.58286575000001,
+        "lng": 138.06873545454545
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 85.07650568181819,
+        "lng": 129.4159090909091
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "PopsiclePete detroyed Mineir0"
+    },
+    {
+      "latLng": {
+        "lat": 61.50060190909091,
+        "lng": 135.8328722727273
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 85.85128015909092,
+        "lng": 130.33045090909093
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 83.18846059090909,
+        "lng": 137.00748545454547
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "13/JG5_Luck detroyed Ejomatic"
     }
   ]
 }
