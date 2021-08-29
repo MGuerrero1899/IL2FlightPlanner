@@ -41,6 +41,28 @@ const mapSettings = {
         mapCenter:[-126,-120],
         tiles: "dist/new_kuban/{z}/{x}/{y}.png" //location of tiles for selected map
     },
+    Stalingrad:{
+        fullName: 'Stalingrad',
+        name: 'stalingrad',
+        hash: '#stalingrad',
+        indexID: 2,
+        latMin: -210,//Top left latitude
+        latMax: -45,//Bottom Right latitude
+        latGridMax: 23,//Total number of grids tall
+        lngMin: 0,//Top Left longitude
+        lngMax: 256,//Top Right Longitude
+        lngGridMax: 42,//Total number of grids wide
+        defaultZoom: 4,
+        minZoom: 3,
+        maxZoom: 5,
+        latOffset: 336,//Latitude offset of the map in order to find correct heading (Prevents negative latitude)
+        latScale: 7, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+        lngScale: 7, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+        scale: 1,
+        originalSize: 210.6,
+        mapCenter:[-138,142],
+        tiles: "dist/new_stalingrad/{z}/{x}/{y}.png" //location of tiles for selected map
+    },
 }
 
 //Declare Icons
@@ -88,7 +110,7 @@ const redBrdgeIcon = L.icon({
 const button = document.querySelector('.create')
 
 //Selected Map Index
-let mapIndex = mapSettings.Moscow
+let mapIndex = mapSettings.Stalingrad
 
 //Declares SW and NE border of image map in pixels
 let mapSW = [8192,0],
