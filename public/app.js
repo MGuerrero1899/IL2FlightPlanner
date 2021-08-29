@@ -151,7 +151,6 @@ let markerCoords = []
 map.on('click',(e) => {
     //Declares speed as speedInput value (Default value is 300kmph)
     let speed = speedInput.value;
-    console.log(speed)
     //Creates marker object and pushes it to the marker coordinates array
     new L.marker(e.latlng).addTo(map)
     let marker = {
@@ -171,8 +170,8 @@ map.on('click',(e) => {
             let heading = calcHeading(a,b)
             let distance = calcDistance(a,b)
             let time = calcTime(speed,distance)
+            //if time is less than 1 min will display in seconds
             let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`
-            console.log(time)
             //Creates a transparent marker for the midpoint and sets text to display heading and distance
             if(distance > 2){
                 new L.marker(midpoint,{
