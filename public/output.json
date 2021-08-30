@@ -402,6 +402,16 @@
     },
     {
       "latLng": {
+        "lat": 113.88938802083334,
+        "lng": 187.63773716517858
+      },
+      "name": "",
+      "type": "taw-af",
+      "color": "blue",
+      "notes": ""
+    },
+    {
+      "latLng": {
         "lat": 133.90423177083332,
         "lng": 136.15890066964286
       },
@@ -494,16 +504,6 @@
       "latLng": {
         "lat": 150.23092447916665,
         "lng": 135.88782087053573
-      },
-      "name": "Rear depot",
-      "type": "base",
-      "color": "red",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 148.26223958333333,
-        "lng": 205.2287527901786
       },
       "name": "Rear depot",
       "type": "base",
@@ -612,8 +612,8 @@
     },
     {
       "latLng": {
-        "lat": 126.55557964843749,
-        "lng": 146.06670937500002
+        "lat": 103.76311952473957,
+        "lng": 136.15793303571428
       },
       "name": "",
       "type": "ground-combat",
@@ -622,98 +622,28 @@
     },
     {
       "latLng": {
-        "lat": 126.64619444010418,
-        "lng": 146.0376376674107
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 126.59220377604167,
-        "lng": 146.0283441127232
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 103.53233035807291,
-        "lng": 147.0379228376116
+        "lat": 105.79696251953125,
+        "lng": 147.88963849051342
       },
       "name": "",
       "type": "combat",
       "color": "black",
-      "notes": "GOA_WarD0G detroyed \u003dr4t\u003dAKForty7Knight"
+      "notes": "CIA_Luth detroyed 453\u003dKinninmont"
     },
     {
       "latLng": {
-        "lat": 126.64334110026041,
-        "lng": 146.17943659319198
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 126.59530332682291,
-        "lng": 146.19463413783484
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 126.69268798828126,
-        "lng": 146.03593719308037
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 126.64619444010418,
-        "lng": 146.0376376674107
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 126.68595177734375,
-        "lng": 146.11942621372768
-      },
-      "name": "",
-      "type": "ground-combat",
-      "color": "black",
-      "notes": ""
-    },
-    {
-      "latLng": {
-        "lat": 101.11553955078125,
-        "lng": 161.120654296875
+        "lat": 102.95612386067708,
+        "lng": 124.68004294084821
       },
       "name": "",
       "type": "combat",
       "color": "black",
-      "notes": "SCG_geronim0 detroyed DocRocketWoody"
+      "notes": "TheMoonRaker detroyed De_stijl"
     },
     {
       "latLng": {
-        "lat": 102.16111246744791,
-        "lng": 192.7185708984375
+        "lat": 91.14046175781249,
+        "lng": 122.24502702287947
       },
       "name": "",
       "type": "ground-combat",
@@ -722,8 +652,8 @@
     },
     {
       "latLng": {
-        "lat": 126.70411273437502,
-        "lng": 146.12194988839286
+        "lat": 91.15316210286458,
+        "lng": 122.23362103794642
       },
       "name": "",
       "type": "ground-combat",
@@ -732,8 +662,8 @@
     },
     {
       "latLng": {
-        "lat": 126.52807513671875,
-        "lng": 146.1383142857143
+        "lat": 78.41487478515624,
+        "lng": 127.69805118582588
       },
       "name": "",
       "type": "ground-combat",
@@ -742,8 +672,8 @@
     },
     {
       "latLng": {
-        "lat": 126.59220377604167,
-        "lng": 146.0283441127232
+        "lat": 103.76095991536458,
+        "lng": 136.33877527901785
       },
       "name": "",
       "type": "ground-combat",
@@ -752,8 +682,78 @@
     },
     {
       "latLng": {
-        "lat": 126.5663218359375,
-        "lng": 146.01282426060268
+        "lat": 103.18474224609373,
+        "lng": 136.87084089006697
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 103.72665201822917,
+        "lng": 136.29688597935268
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 103.18937477864586,
+        "lng": 136.76769609374998
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 99.00645648437502,
+        "lng": 142.23063636997767
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "King_Bob detroyed JV44Hambone307"
+    },
+    {
+      "latLng": {
+        "lat": 100.5514516015625,
+        "lng": 142.7139197126116
+      },
+      "name": "",
+      "type": "combat",
+      "color": "black",
+      "notes": "JV44Hambone307 detroyed CaptainSmokie"
+    },
+    {
+      "latLng": {
+        "lat": 91.22175548177083,
+        "lng": 122.21256503906251
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 107.78914595052083,
+        "lng": 136.42815690569196
+      },
+      "name": "",
+      "type": "ground-combat",
+      "color": "black",
+      "notes": ""
+    },
+    {
+      "latLng": {
+        "lat": 148.28739420572916,
+        "lng": 205.1868634905134
       },
       "name": "",
       "type": "ground-combat",

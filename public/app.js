@@ -125,6 +125,21 @@ function findMap(obj,hash){
         }
     }
 }
+function clearMap(){
+    //Resets all marker arrays
+    markerCoords= []
+    serverMarkers = []
+    blueFrontline = []
+    redFrontline = []
+    //Removes old map tiles
+    map.removeLayer(mapTiles)
+    //Removes all markers from map
+    flightPlan.clearLayers()
+    redAFLayer.clearLayers()
+    bluAFLayer.clearLayers()
+    targetGroup.clearLayers()
+    frontlineLayer.clearLayers()
+}
 //Default Map loaded is stalingrad
 let mapIndex = mapSettings.Stalingrad
 
@@ -155,11 +170,20 @@ let mapTiles = L.tileLayer(mapIndex.tiles, {
     map.unproject(mapNE, map.getMaxZoom())
 )) */
 
-//
-mapChoice.addEventListener('change',() => {
+//Finds new map index everytime map is changed via dropdown
+mapChoice.addEventListener('change',async () => {
+    if(mapChoice.value === '#finnish'){
+        //Fetches finnish server json
+        let data = await fetchData()
+        mapChoice.value = data.mapHash
+        //Gets server marker locations
+        populateMap()
+    }
+    //Sets map to changed map value
     mapIndex = findMap(mapSettings, mapChoice.value)
-    console.log(mapIndex)
-    map.removeLayer(mapTiles)
+    //Clears the map for new tiles
+    clearMap()
+    //Instantiates new selected map tiles
     mapTiles = L.tileLayer(mapIndex.tiles, {
         minZoom: mapIndex.minZoom,
         maxZoom : mapIndex.maxZoom,
@@ -175,6 +199,12 @@ button.addEventListener('click', () => {
 
 //Array of marker coordinates
 let markerCoords = []
+//Array of server markers
+let serverMarkers = []
+//Array of frontline coords
+let blueFrontline = []
+let redFrontline = []
+
 //Allows toggling on and off FLight Plan markers on map
 let flightPlan = L.layerGroup().addTo(map)
 //Creates marker based on clicked location of map
@@ -270,15 +300,18 @@ function calcTime(speed,distance){
 
 
 //Parses Server json and populates map accordingly
-let serverPoints = populateMap()
-
-//Parse JSON and add markers to map
+//let serverPoints = populateMap()
+//fetches server json
+async function fetchData(){
+    const res = await fetch('output.json')
+    const data = await res.json()
+    return data
+}
+//Populates map with markers using server json
 async function populateMap(){
-      const res = await fetch('output.json')
-      const data = await res.json()
-      let serverMarkers = []
-      //Loops through points object from servers json
-      data.points.forEach(i => {
+    let data = await fetchData()
+    //Loops through points object from servers json
+    data.points.forEach(i => {
         let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base','taw-train']
         let y = i.latLng.lat
         let x = i.latLng.lng
@@ -418,9 +451,6 @@ let frontlineLayer = L.layerGroup().addTo(map)
 //Uses passed data from the server to draw the frontline
 function drawFrontline(data){
     data.frontline.forEach(frontline => {
-        let blueFrontline = []
-        let redFrontline = []
-
         //Blue Axis Frontline
         frontline[0].forEach(coords => {
             let y = coords[0]
