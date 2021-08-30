@@ -26,10 +26,10 @@ const mapSettings = {
         name: 'kuban',
         hash: '#kuban',
         indexID: 1,
-        latMin: -216,//Top left latitude
-        latMax: -40,//Bottom Right latitude
+        latMin: -216,//Bottom left latitude
+        latMax: -40,//Top Right latitude
         latGridMax: 29,//Total number of grids tall
-        lngMin: 0,//Top Left longitude
+        lngMin: 0,//Bottom Left longitude
         lngMax: 256,//Top Right Longitude
         lngGridMax: 42,//Total number of grids wide
         defaultZoom: 4,
@@ -38,6 +38,8 @@ const mapSettings = {
         latOffset: 336,//Latitude offset of the map in order to find correct heading (Prevents negative latitude)
         latScale: 6, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
         lngScale: 6, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+        scale: 1.79,
+        originalSize: 218,
         mapCenter:[-120,120],
         tiles: "dist/new_kuban/{z}/{x}/{y}.png" //location of tiles for selected map
     },
@@ -46,10 +48,10 @@ const mapSettings = {
         name: 'stalingrad',
         hash: '#stalingrad',
         indexID: 2,
-        latMin: -210,//Top left latitude
-        latMax: -45,//Bottom Right latitude
+        latMin: -210,//Bottom left latitude
+        latMax: -45,//Top Right latitude
         latGridMax: 23,//Total number of grids tall
-        lngMin: 0,//Top Left longitude
+        lngMin: 0,//Bottom Left longitude
         lngMax: 256,//Top Right Longitude
         lngGridMax: 42,//Total number of grids wide
         defaultZoom: 4,
@@ -222,9 +224,9 @@ map.on('click',(e) => {
         lng: e.latlng.lng,
     }
     markerCoords.push(marker);
-    //console.log(markerCoords);
+    console.log(markerCoords);
     //Adds a polyline to connect each point
-    const polyline = L.polyline(markerCoords, {color: 'red'});
+    const polyline = L.polyline(markerCoords, {color: 'red',weight: '3',dashArray: '20,20'});
     //Adds marker and point to our FlightPlan
     flightPlan.addLayer(point);
     flightPlan.addLayer(polyline);
@@ -296,6 +298,13 @@ function calcTime(speed,distance){
 }
   //Converts Server JSON (lat,lng) points to respective point on map
   function convertServerToMap(y,x){
+    if(mapIndex.indexID === 1){
+        x *= mapIndex.scale;
+        y *= mapIndex.scale;
+        y -= mapIndex.originalSize;
+        x -= .7; //lng shift (Specific for Kuban for some reason)
+        return [y,x]
+    }
     y -= mapIndex.originalSize; //Original Map Latitude Maxmimum
     y *= mapIndex.scale; //Original vs Leaflet map scale difference
     x *= mapIndex.scale; //Original vs Leaflet map scale difference
@@ -383,6 +392,7 @@ function getCustomIcon(serverMarkers){
                 break;
             case 'taw-train':
                 if(point.color === 'red'){
+                    console.log("Red train")
                     selectIcon = mapIcons.redTrainIcon;
                 }else{
                     selectIcon = mapIcons.bluTrainIcon;
