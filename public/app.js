@@ -147,19 +147,24 @@ button.addEventListener('click', () => {
 
 //Array of marker coordinates
 let markerCoords = []
+//Allows toggling on and off FLight Plan markers on map
+let flightPlan = L.layerGroup().addTo(map)
 //Creates marker based on clicked location of map
 map.on('click',(e) => {
     //Declares speed as speedInput value (Default value is 300kmph)
     let speed = speedInput.value;
     //Creates marker object and pushes it to the marker coordinates array
-    new L.marker(e.latlng).addTo(map)
+    let point = new L.marker(e.latlng)
     let marker = {
         lat: e.latlng.lat,
         lng: e.latlng.lng,
     }
     markerCoords.push(marker)
     //Adds a polyline to connect each point
-    const polyline = L.polyline(markerCoords, {color: 'red'}).addTo(map)
+    const polyline = L.polyline(markerCoords, {color: 'red'})
+    //Adds marker and point to our FlightPlan
+    flightPlan.addLayer(point)
+    flightPlan.addLayer(polyline)
     //Determines if there are atleast two marker points on map
     if(markerCoords.length != 0){
         //Loops through marker coordinates array and calculates midpoint,heading, and distance
@@ -174,13 +179,14 @@ map.on('click',(e) => {
             let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`
             //Creates a transparent marker for the midpoint and sets text to display heading and distance
             if(distance > 2){
-                new L.marker(midpoint,{
+              let midpointMarker = new L.marker(midpoint,{
                     opacity: 1,
                     icon: L.divIcon({
                         className: 'midpoint-label',
                         html: `${heading}°|${distance}km|${timeToTarget}`
                     })
-                }).addTo(map)
+                })
+                flightPlan.addLayer(midpointMarker)
             }
         }
     }
@@ -344,24 +350,42 @@ function getCustomIcon(serverMarkers){
         }
     })
 }
+//Target Layer Group
+let targetGroup = L.layerGroup().addTo(map)
+//Allied airfield Layer Group
+let redAFLayer = L.layerGroup().addTo(map)
+//Axis Airfield Layer Group
+let bluAFLayer = L.layerGroup().addTo(map)
 //Creates a marker with a custom icon for getCustomIcon()
 function createCustomIcon(markerCoords,selectIcon){
-    new L.marker(markerCoords,{
+    let iconURL = selectIcon.options.iconUrl
+    let marker = new L.marker(markerCoords,{
         icon: selectIcon,
         interactive:false
-    }).addTo(map)
+    })
+    //Determines if marker is an airfield marker
+    if(iconURL.includes('airfield')){
+        //Adds marker to Allied or Axis based on icon URL substring
+        iconURL.includes('blue') ? bluAFLayer.addLayer(marker) : redAFLayer.addLayer(marker)
+    }else{
+        //If not airfield adds marker to target layer
+        targetGroup.addLayer(marker)
+    }
+
 }
 //Creates a label with the name for the custom icon marker
 function createLabel(labelCoords,name){
-    new L.marker(labelCoords,{
+    let markerLabel = new L.marker(labelCoords,{
         icon:L.divIcon({
             html: `<b>${name}</b>`,
             className: 'icon-label'
         }),
         interactive:false
-    }).addTo(map)
+    })
+    targetGroup.addLayer(markerLabel)
 }
-
+//Creates frontline layer
+let frontlineLayer = L.layerGroup().addTo(map)
 //Uses passed data from the server to draw the frontline
 function drawFrontline(data){
     data.frontline.forEach(frontline => {
@@ -377,15 +401,17 @@ function drawFrontline(data){
             //Pushes coordinates to Blue Frontline Array
             blueFrontline.push(blueCoords)
             //Creates marker at blue coordinate and adds to map
-            new L.marker(blueCoords,{
+            let frontMarker = new L.marker(blueCoords,{
                 icon:L.divIcon({
                     opacity: 0
                 }),
                 opacity: 0,
                 interactive:false
-            }).addTo(map)
+            })
             //Connects all blueFrontline coordinates together with a polyline
-            L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3,interactive:false}).addTo(map)
+            let frontPolyline = L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3,interactive:false})
+            frontlineLayer.addLayer(frontMarker)
+            frontlineLayer.addLayer(frontPolyline)
         })
 
         //Red Allied Frontline
@@ -397,16 +423,28 @@ function drawFrontline(data){
             //Pushes coordinates to Red Frontline Array
             redFrontline.push(redCoords)
             //Creates marker at red coordinate and adds to map
-            new L.marker(redCoords,{
+            let frontMarker = new L.marker(redCoords,{
                 icon:L.divIcon({
                     opacity: 0
                 }),
                 opacity: 0,
                 interactive:false
-            }).addTo(map)
+            })
             //Connects all redFrontline coordinates together with a polyline
-            L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3,interactive:false}).addTo(map)
+            let frontPolyline = L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3,interactive:false})
+            frontlineLayer.addLayer(frontMarker)
+            frontlineLayer.addLayer(frontPolyline)
         })
    })
 }
+//Controls Map Layer names
+let overlay = {
+    'Flight-Plan':flightPlan,
+    'Allied Airfields':redAFLayer,
+    'Axis Airfields':bluAFLayer,
+    'Targets':targetGroup,
+    'Frontline':frontlineLayer
+}
 
+//Adds our layers to the map
+L.control.layers(null,overlay).addTo(map)
