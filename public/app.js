@@ -32,7 +32,7 @@ const mapSettings = {
         lngMin: 0,//Top Left longitude
         lngMax: 256,//Top Right Longitude
         lngGridMax: 42,//Total number of grids wide
-        defaultZoom: 3,
+        defaultZoom: 4,
         minZoom: 3,
         maxZoom: 5,
         latOffset: 336,//Latitude offset of the map in order to find correct heading (Prevents negative latitude)
@@ -194,6 +194,7 @@ mapChoice.addEventListener('change',async () => {
         continuousWorld: false,
         bounds:bounds
     }).addTo(map)
+    map.setView(mapIndex.mapCenter,mapIndex.defaultZoom)
 })
 //Recenters Map
 button.addEventListener('click', () => {
@@ -221,7 +222,7 @@ map.on('click',(e) => {
         lng: e.latlng.lng,
     }
     markerCoords.push(marker);
-    console.log(markerCoords);
+    //console.log(markerCoords);
     //Adds a polyline to connect each point
     const polyline = L.polyline(markerCoords, {color: 'red'});
     //Adds marker and point to our FlightPlan
