@@ -108,6 +108,14 @@ const mapIcons = {
     redBrdgeIcon: L.icon({
         iconUrl: './dist/icons/redbridge.png',
         iconSize: [45,45]
+    }),
+    bluShipIcon: L.icon({
+        iconUrl: './dist/icons/blueships.png',
+        iconSize: [55,55]
+    }),
+    redShipIcon: L.icon({
+        iconUrl: './dist/icons/redships.png',
+        iconSize: [55,55]
     })
 }
 
@@ -322,7 +330,7 @@ async function populateMap(){
     let data = await fetchData()
     //Loops through points object from servers json
     data.points.forEach(i => {
-        let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base','taw-train']
+        let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base','taw-train','target']
         let y = i.latLng.lat;
         let x = i.latLng.lng;
         let type = i.type;
@@ -415,6 +423,14 @@ function getCustomIcon(serverMarkers){
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;   
+            case 'target':
+                if(point.color === 'red'){
+                    selectIcon = mapIcons.redShipIcon;
+                }else{
+                    selectIcon = mapIcons.bluShipIcon;
+                }
+                createCustomIcon(markerCoords,selectIcon)
+                break;
             default:
                 console.log("No marker selected");
                 console.log(type);
