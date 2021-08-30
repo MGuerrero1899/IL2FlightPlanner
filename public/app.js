@@ -109,9 +109,11 @@ const mapIcons = {
     })
 }
 
+//HTML Elements
 const button = document.querySelector('.recenter');
 const speedInput = document.querySelector('#flightSpeed');
-const mapChoice = document.querySelector('#mapchoice')
+const mapChoice = document.querySelector('#mapchoice');
+const mapTitle = document.querySelector('h1');
 
 //Gets Map Object Settings based on Map choice value
 function findMap(obj,hash){
@@ -134,14 +136,14 @@ function clearMap(){
     //Removes old map tiles
     map.removeLayer(mapTiles)
     //Removes all markers from map
-    flightPlan.clearLayers()
-    redAFLayer.clearLayers()
-    bluAFLayer.clearLayers()
-    targetGroup.clearLayers()
-    frontlineLayer.clearLayers()
+    flightPlan.clearLayers();
+    redAFLayer.clearLayers();
+    bluAFLayer.clearLayers();
+    targetGroup.clearLayers();
+    frontlineLayer.clearLayers();
 }
 //Default Map loaded is stalingrad
-let mapIndex = mapSettings.Stalingrad
+let mapIndex = mapSettings.Stalingrad;
 
 //Declares SW and NE border of image map in pixels
 let mapSW = [8192,0],
@@ -174,15 +176,16 @@ let mapTiles = L.tileLayer(mapIndex.tiles, {
 mapChoice.addEventListener('change',async () => {
     if(mapChoice.value === '#finnish'){
         //Fetches finnish server json
-        let data = await fetchData()
-        mapChoice.value = data.mapHash
+        let data = await fetchData();
+        mapChoice.value = data.mapHash;
         //Gets server marker locations
-        populateMap()
+        populateMap();
     }
     //Sets map to changed map value
-    mapIndex = findMap(mapSettings, mapChoice.value)
+    mapIndex = findMap(mapSettings, mapChoice.value);
+    mapTitle.textContent = mapIndex.fullName;
     //Clears the map for new tiles
-    clearMap()
+    clearMap();
     //Instantiates new selected map tiles
     mapTiles = L.tileLayer(mapIndex.tiles, {
         minZoom: mapIndex.minZoom,
@@ -212,30 +215,30 @@ map.on('click',(e) => {
     //Declares speed as speedInput value (Default value is 300kmph)
     let speed = speedInput.value;
     //Creates marker object and pushes it to the marker coordinates array
-    let point = new L.marker(e.latlng)
+    let point = new L.marker(e.latlng);
     let marker = {
         lat: e.latlng.lat,
         lng: e.latlng.lng,
     }
-    markerCoords.push(marker)
-    console.log(markerCoords)
+    markerCoords.push(marker);
+    console.log(markerCoords);
     //Adds a polyline to connect each point
-    const polyline = L.polyline(markerCoords, {color: 'red'})
+    const polyline = L.polyline(markerCoords, {color: 'red'});
     //Adds marker and point to our FlightPlan
-    flightPlan.addLayer(point)
-    flightPlan.addLayer(polyline)
+    flightPlan.addLayer(point);
+    flightPlan.addLayer(polyline);
     //Determines if there are atleast two marker points on map
     if(markerCoords.length != 0){
         //Loops through marker coordinates array and calculates midpoint,heading, and distance
         for(let i = 0; i < markerCoords.length -1; i++){
             let a = markerCoords[i];
             let b = markerCoords[i + 1];
-            let midpoint = calcMidPoint(a,b)
-            let heading = calcHeading(a,b)
-            let distance = calcDistance(a,b)
-            let time = calcTime(speed,distance)
+            let midpoint = calcMidPoint(a,b);
+            let heading = calcHeading(a,b);
+            let distance = calcDistance(a,b);
+            let time = calcTime(speed,distance);
             //if time is less than 1 min will display in seconds
-            let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`
+            let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`;
             //Creates a transparent marker for the midpoint and sets text to display heading and distance
             if(distance > 2){
               let midpointMarker = new L.marker(midpoint,{
@@ -245,7 +248,7 @@ map.on('click',(e) => {
                         html: `${heading}°|${distance}km|${timeToTarget}`
                     })
                 })
-                flightPlan.addLayer(midpointMarker)
+                flightPlan.addLayer(midpointMarker);
             }
         }
     }
@@ -260,12 +263,12 @@ function calcMidPoint(a,b){
 //Calculates Heading between two map points
 function calcHeading(a,b){
     //Accounts for the offset of the map
-    let latTwo = b.lat + mapIndex.latOffset
-    let latOne = a.lat + mapIndex.latOffset
+    let latTwo = b.lat + mapIndex.latOffset;
+    let latOne = a.lat + mapIndex.latOffset;
 
-    let radians = Math.atan2(latTwo - latOne, b.lng - a.lng)
+    let radians = Math.atan2(latTwo - latOne, b.lng - a.lng);
     let degrees = radians * 180 / Math.PI;
-    let heading = geoToMagnetic(degrees)
+    let heading = geoToMagnetic(degrees);
     return Math.round(heading)
 }
 
@@ -278,9 +281,9 @@ function geoToMagnetic(degrees){
 }
 //Calculates the distance between two points on the map
 function calcDistance(a,b){
-    let x = Math.floor(((b.lat - a.lat)/ mapIndex.latScale) * 10)
-    let y = Math.floor(((b.lng - a.lng) / mapIndex.lngScale) * 10)
-    let distance = Math.sqrt(x*x + y*y)
+    let x = Math.floor(((b.lat - a.lat)/ mapIndex.latScale) * 10);
+    let y = Math.floor(((b.lng - a.lng) / mapIndex.lngScale) * 10);
+    let distance = Math.sqrt(x*x + y*y);
     return distance.toFixed(2)
 }
 function calcTime(speed,distance){
@@ -298,13 +301,10 @@ function calcTime(speed,distance){
     return [y,x]
 }
 
-
-//Parses Server json and populates map accordingly
-//let serverPoints = populateMap()
 //fetches server json
 async function fetchData(){
-    const res = await fetch('output.json')
-    const data = await res.json()
+    const res = await fetch('output.json');
+    const data = await res.json();
     return data
 }
 //Populates map with markers using server json
@@ -313,14 +313,14 @@ async function populateMap(){
     //Loops through points object from servers json
     data.points.forEach(i => {
         let acceptedTypes = ['taw-depo','taw-bridge','taw-def','taw-af','base','taw-train']
-        let y = i.latLng.lat
-        let x = i.latLng.lng
-        let type = i.type
+        let y = i.latLng.lat;
+        let x = i.latLng.lng;
+        let type = i.type;
         //Checks if Accepted Type is found in points object
         if(acceptedTypes.includes(type)){
             //By default taw-af has no name, so we assign it the name of Airfield
             if(type == 'taw-af'){
-                i.name = 'Airfield'
+                i.name = 'Airfield';
             }
             //Pushes values that passed the check as an object to our server markers array
             serverMarkers.push(
@@ -341,86 +341,86 @@ async function populateMap(){
 function getCustomIcon(serverMarkers){
     serverMarkers.forEach(point => {
         //Converts server json lat,lng to its respective lat,lng on the map
-        let y = point.lat
-        let x = point.lng
-        let markerCoords = convertServerToMap(y,x)
-        let labelCoords = markerCoords
+        let y = point.lat;
+        let x = point.lng;
+        let markerCoords = convertServerToMap(y,x);
+        let labelCoords = markerCoords;
         //Determines what type of marker the coordinates are
-        let type = point.type
-        let name = point.name.toUpperCase()
+        let type = point.type;
+        let name = point.name.toUpperCase();
         //Pre Declaring selectIcon (Will be updated with a value in the switch statement)
-        let selectIcon
+        let selectIcon;
         if(point.name != 'DESTROYED'){
             if(type != 'taw-af'){
-                createLabel(labelCoords,name)
+                createLabel(labelCoords,name);
             }
         //Determines what type of icon to give the marker
         switch (type) {
             case 'taw-af':
                 if(point.color === 'red'){
-                    selectIcon = mapIcons.redAFIcon
+                    selectIcon = mapIcons.redAFIcon;
                 }else{
-                    selectIcon = mapIcons.bluAFIcon
+                    selectIcon = mapIcons.bluAFIcon;
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-def':
                 if(point.color === 'red'){
-                    selectIcon = mapIcons.redTrpIcon
+                    selectIcon = mapIcons.redTrpIcon;
                 }else{
-                    selectIcon = mapIcons.bluTrpIcon
+                    selectIcon = mapIcons.bluTrpIcon;
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'base':
                 if(point.color === 'red'){
-                    selectIcon = mapIcons.redDepotIcon
+                    selectIcon = mapIcons.redDepotIcon;
                 }else{
-                    selectIcon = mapIcons.bluDepotIcon
+                    selectIcon = mapIcons.bluDepotIcon;
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-train':
                 if(point.color === 'red'){
-                    selectIcon = mapIcons.redTrainIcon
+                    selectIcon = mapIcons.redTrainIcon;
                 }else{
-                    selectIcon = mapIcons.bluTrainIcon
+                    selectIcon = mapIcons.bluTrainIcon;
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-depo':
                 if(point.color === 'red'){
-                    selectIcon = mapIcons.redDepotIcon
+                    selectIcon = mapIcons.redDepotIcon;
                 }else{
-                    selectIcon = mapIcons.bluDepotIcon
+                    selectIcon = mapIcons.bluDepotIcon;
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-bridge':
                 if(point.color === 'red'){
-                    selectIcon = mapIcons.redBrdgeIcon
+                    selectIcon = mapIcons.redBrdgeIcon;
                 }else{
-                    selectIcon = mapIcons.bluBrdgeIcon
+                    selectIcon = mapIcons.bluBrdgeIcon;
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;   
             default:
-                console.log("No marker selected")
-                console.log(type)
+                console.log("No marker selected");
+                console.log(type);
                 break;
         }
         }
     })
 }
 //Target Layer Group
-let targetGroup = L.layerGroup().addTo(map)
+let targetGroup = L.layerGroup().addTo(map);
 //Allied airfield Layer Group
-let redAFLayer = L.layerGroup().addTo(map)
+let redAFLayer = L.layerGroup().addTo(map);
 //Axis Airfield Layer Group
-let bluAFLayer = L.layerGroup().addTo(map)
+let bluAFLayer = L.layerGroup().addTo(map);
 //Creates a marker with a custom icon for getCustomIcon()
 function createCustomIcon(markerCoords,selectIcon){
-    let iconURL = selectIcon.options.iconUrl
+    let iconURL = selectIcon.options.iconUrl;
     let marker = new L.marker(markerCoords,{
         icon: selectIcon,
         interactive:false
@@ -428,10 +428,10 @@ function createCustomIcon(markerCoords,selectIcon){
     //Determines if marker is an airfield marker
     if(iconURL.includes('airfield')){
         //Adds marker to Allied or Axis based on icon URL substring
-        iconURL.includes('blue') ? bluAFLayer.addLayer(marker) : redAFLayer.addLayer(marker)
+        iconURL.includes('blue') ? bluAFLayer.addLayer(marker) : redAFLayer.addLayer(marker);
     }else{
         //If not airfield adds marker to target layer
-        targetGroup.addLayer(marker)
+        targetGroup.addLayer(marker);
     }
 
 }
@@ -444,7 +444,7 @@ function createLabel(labelCoords,name){
         }),
         interactive:false
     })
-    targetGroup.addLayer(markerLabel)
+    targetGroup.addLayer(markerLabel);
 }
 //Creates frontline layer
 let frontlineLayer = L.layerGroup().addTo(map)
@@ -456,9 +456,9 @@ function drawFrontline(data){
             let y = coords[0]
             let x = coords[1]
             //Converts JSON Frontline Coordinates to respective Map Coordinates
-            let blueCoords = convertServerToMap(y,x)
+            let blueCoords = convertServerToMap(y,x);
             //Pushes coordinates to Blue Frontline Array
-            blueFrontline.push(blueCoords)
+            blueFrontline.push(blueCoords);
             //Creates marker at blue coordinate and adds to map
             let frontMarker = new L.marker(blueCoords,{
                 icon:L.divIcon({
@@ -468,9 +468,9 @@ function drawFrontline(data){
                 interactive:false
             })
             //Connects all blueFrontline coordinates together with a polyline
-            let frontPolyline = L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3,interactive:false})
-            frontlineLayer.addLayer(frontMarker)
-            frontlineLayer.addLayer(frontPolyline)
+            let frontPolyline = L.polyline(blueFrontline,{color:'blue',weight:2,smoothFactor:3,interactive:false});
+            frontlineLayer.addLayer(frontMarker);
+            frontlineLayer.addLayer(frontPolyline);
         })
 
         //Red Allied Frontline
@@ -478,9 +478,9 @@ function drawFrontline(data){
             let y = coords[0]
             let x = coords[1]
             //Converts JSON Frontline Coordinates to respective Map Coordinates
-            let redCoords = convertServerToMap(y,x)
+            let redCoords = convertServerToMap(y,x);
             //Pushes coordinates to Red Frontline Array
-            redFrontline.push(redCoords)
+            redFrontline.push(redCoords);
             //Creates marker at red coordinate and adds to map
             let frontMarker = new L.marker(redCoords,{
                 icon:L.divIcon({
@@ -490,9 +490,9 @@ function drawFrontline(data){
                 interactive:false
             })
             //Connects all redFrontline coordinates together with a polyline
-            let frontPolyline = L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3,interactive:false})
-            frontlineLayer.addLayer(frontMarker)
-            frontlineLayer.addLayer(frontPolyline)
+            let frontPolyline = L.polyline(redFrontline,{color:'red',weight:2,smoothFactor:3,interactive:false});
+            frontlineLayer.addLayer(frontMarker);
+            frontlineLayer.addLayer(frontPolyline);
         })
    })
 }
@@ -506,4 +506,4 @@ let overlay = {
 }
 
 //Adds our layers to the map
-L.control.layers(null,overlay).addTo(map)
+L.control.layers(null,overlay).addTo(map);
