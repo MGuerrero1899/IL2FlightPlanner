@@ -108,47 +108,6 @@ const mapIcons = {
         iconSize: [45,45]
     })
 }
-/*
-const bluAFIcon = L.icon({
-    iconUrl: './dist/icons/blueairfield.png',
-    iconSize: [35,35]
-})
-const bluTrpIcon = L.icon({
-    iconUrl: './dist/icons/bluefronttroops.png',
-    iconSize: [40,40]
-})
-const bluTrainIcon = L.icon({
-    iconUrl: './dist/icons/bluetrain.png',
-    iconSize: [75,75]
-})
-const bluBrdgeIcon = L.icon({
-    iconUrl: './dist/icons/bluebridge.png',
-    iconSize: [45,45]
-})
-const bluDepotIcon = L.icon({
-    iconUrl: './dist/icons/bluedepot.png',
-    iconSize: [50,50]
-})
-const redAFIcon = L.icon({
-    iconUrl: './dist/icons/redairfield.png',
-    iconSize: [35,35]
-})
-const redTrpIcon = L.icon({
-    iconUrl: './dist/icons/redfronttroops.png',
-    iconSize: [40,40]
-})
-const redTrainIcon = L.icon({
-    iconUrl: './dist/icons/redtrain.png',
-    iconSize: [75,75]
-})
-const redDepotIcon = L.icon({
-    iconUrl: './dist/icons/reddepot.png',
-    iconSize: [50,50]
-})
-const redBrdgeIcon = L.icon({
-    iconUrl: './dist/icons/redbridge.png',
-    iconSize: [45,45]
-}) */
 
 const button = document.querySelector('.recenter');
 const speedInput = document.querySelector('#flightSpeed');
