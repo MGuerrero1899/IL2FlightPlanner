@@ -22,12 +22,17 @@
     <div class="container2">
         <div id="mapid"></div>
         <div class="leaflet-bottom leaflet-left">
+            <select name="mapchoice" id="mapchoice">
+                <option value="#stalingrad">Stalingrad</option>
+                <option value="#kuban">Kuban</option>
+                <option value="#moscow">Moscow</option>
+            </select>
             <button class="recenter">CENTER MAP</button>
             <input type="number" value='300' id="flightSpeed">
         </div>
     </div>
     </div>
 
-    <script src="./app.js"></script>
+    <script type="module" src="./app.js"></script>
 </body>
 </html>

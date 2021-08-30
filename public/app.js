@@ -13,7 +13,7 @@ const mapSettings = {
         defaultZoom: 3,
         minZoom: 3,
         maxZoom: 5,
-        latOffset: 256, //Latitude offset of the map in order to find correct heading (Prevents negative latitude)
+        latOffset: 256, //Latitude offset of the map in order to find correct heading (Prevents negative latitude) Calculation is 256 + height border difference
         latScale: 9, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
         lngScale: 9, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
         scale: 1.33333333333333,
@@ -36,9 +36,9 @@ const mapSettings = {
         minZoom: 3,
         maxZoom: 5,
         latOffset: 336,//Latitude offset of the map in order to find correct heading (Prevents negative latitude)
-        latScale: 9, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
-        lngScale: 9, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
-        mapCenter:[-126,-120],
+        latScale: 6, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+        lngScale: 6, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+        mapCenter:[-120,120],
         tiles: "dist/new_kuban/{z}/{x}/{y}.png" //location of tiles for selected map
     },
     Stalingrad:{
@@ -55,7 +55,7 @@ const mapSettings = {
         defaultZoom: 4,
         minZoom: 3,
         maxZoom: 5,
-        latOffset: 336,//Latitude offset of the map in order to find correct heading (Prevents negative latitude)
+        latOffset: 346,//Latitude offset of the map in order to find correct heading (Prevents negative latitude)
         latScale: 7, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
         lngScale: 7, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
         scale: 1,
@@ -66,6 +66,49 @@ const mapSettings = {
 }
 
 //Declare Icons
+const mapIcons = {
+    bluAFIcon: L.icon({
+        iconUrl: './dist/icons/blueairfield.png',
+        iconSize: [35,35]
+    }),
+    bluTrpIcon: L.icon({
+        iconUrl: './dist/icons/bluefronttroops.png',
+        iconSize: [40,40]
+    }),
+    bluTrainIcon: L.icon({
+        iconUrl: './dist/icons/bluetrain.png',
+        iconSize: [75,75]
+    }),
+    bluBrdgeIcon: L.icon({
+        iconUrl: './dist/icons/bluebridge.png',
+        iconSize: [45,45]
+    }),
+    bluDepotIcon: L.icon({
+        iconUrl: './dist/icons/bluedepot.png',
+        iconSize: [50,50]
+    }),
+    redAFIcon: L.icon({
+        iconUrl: './dist/icons/redairfield.png',
+        iconSize: [35,35]
+    }),
+    redTrpIcon: L.icon({
+        iconUrl: './dist/icons/redfronttroops.png',
+        iconSize: [40,40]
+    }),
+    redTrainIcon: L.icon({
+        iconUrl: './dist/icons/redtrain.png',
+        iconSize: [75,75]
+    }),
+    redDepotIcon: L.icon({
+        iconUrl: './dist/icons/reddepot.png',
+        iconSize: [50,50]
+    }),
+    redBrdgeIcon: L.icon({
+        iconUrl: './dist/icons/redbridge.png',
+        iconSize: [45,45]
+    })
+}
+/*
 const bluAFIcon = L.icon({
     iconUrl: './dist/icons/blueairfield.png',
     iconSize: [35,35]
@@ -105,12 +148,25 @@ const redDepotIcon = L.icon({
 const redBrdgeIcon = L.icon({
     iconUrl: './dist/icons/redbridge.png',
     iconSize: [45,45]
-})
+}) */
 
 const button = document.querySelector('.recenter');
 const speedInput = document.querySelector('#flightSpeed');
+const mapChoice = document.querySelector('#mapchoice')
 
-//Selected Map Index
+//Gets Map Object Settings based on Map choice value
+function findMap(obj,hash){
+    for(let i in obj){
+        if(typeof obj[i] === 'object'){
+            for(let j in obj[i]){
+                if(obj[i][j] === hash){
+                    return obj[i]
+                }
+            }
+        }
+    }
+}
+//Default Map loaded is stalingrad
 let mapIndex = mapSettings.Stalingrad
 
 //Declares SW and NE border of image map in pixels
@@ -126,7 +182,7 @@ const map = L.map('mapid',{
 }).setView(mapIndex.mapCenter,mapIndex.defaultZoom)
 
 //Populates the map with tiles depending on the specified index
-const mapTiles = L.tileLayer(mapIndex.tiles, {
+let mapTiles = L.tileLayer(mapIndex.tiles, {
     minZoom: mapIndex.minZoom,
     maxZoom : mapIndex.maxZoom,
     noWrap: true,
@@ -140,6 +196,19 @@ const mapTiles = L.tileLayer(mapIndex.tiles, {
     map.unproject(mapNE, map.getMaxZoom())
 )) */
 
+//
+mapChoice.addEventListener('change',() => {
+    mapIndex = findMap(mapSettings, mapChoice.value)
+    console.log(mapIndex)
+    map.removeLayer(mapTiles)
+    mapTiles = L.tileLayer(mapIndex.tiles, {
+        minZoom: mapIndex.minZoom,
+        maxZoom : mapIndex.maxZoom,
+        noWrap: true,
+        continuousWorld: false,
+        bounds:bounds
+    }).addTo(map)
+})
 //Recenters Map
 button.addEventListener('click', () => {
     map.setView(mapIndex.mapCenter,mapIndex.defaultZoom)
@@ -160,6 +229,7 @@ map.on('click',(e) => {
         lng: e.latlng.lng,
     }
     markerCoords.push(marker)
+    console.log(markerCoords)
     //Adds a polyline to connect each point
     const polyline = L.polyline(markerCoords, {color: 'red'})
     //Adds marker and point to our FlightPlan
@@ -296,49 +366,49 @@ function getCustomIcon(serverMarkers){
         switch (type) {
             case 'taw-af':
                 if(point.color === 'red'){
-                    selectIcon = redAFIcon
+                    selectIcon = mapIcons.redAFIcon
                 }else{
-                    selectIcon = bluAFIcon
+                    selectIcon = mapIcons.bluAFIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-def':
                 if(point.color === 'red'){
-                    selectIcon = redTrpIcon
+                    selectIcon = mapIcons.redTrpIcon
                 }else{
-                    selectIcon = bluTrpIcon
+                    selectIcon = mapIcons.bluTrpIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'base':
                 if(point.color === 'red'){
-                    selectIcon = redDepotIcon
+                    selectIcon = mapIcons.redDepotIcon
                 }else{
-                    selectIcon = bluDepotIcon
+                    selectIcon = mapIcons.bluDepotIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-train':
                 if(point.color === 'red'){
-                    selectIcon = redTrainIcon
+                    selectIcon = mapIcons.redTrainIcon
                 }else{
-                    selectIcon = bluTrainIcon
+                    selectIcon = mapIcons.bluTrainIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-depo':
                 if(point.color === 'red'){
-                    selectIcon = redDepotIcon
+                    selectIcon = mapIcons.redDepotIcon
                 }else{
-                    selectIcon = bluDepotIcon
+                    selectIcon = mapIcons.bluDepotIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;
             case 'taw-bridge':
                 if(point.color === 'red'){
-                    selectIcon = redBrdgeIcon
+                    selectIcon = mapIcons.redBrdgeIcon
                 }else{
-                    selectIcon = bluBrdgeIcon
+                    selectIcon = mapIcons.bluBrdgeIcon
                 }
                 createCustomIcon(markerCoords,selectIcon)
                 break;   

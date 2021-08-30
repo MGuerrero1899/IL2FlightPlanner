@@ -16,7 +16,7 @@ body{
     flex-grow: 1;
     width: 100%;
 }
-button, input{
+button, input,select{
     pointer-events: auto;
 }
 button{
