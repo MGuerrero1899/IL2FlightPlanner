@@ -118,16 +118,22 @@ const mapIcons = {
         iconSize: [55,55]
     })
 }
-
+const waypointIcons = [
+    './dist/icons/waypoint.png',
+    './dist/icons/takeoff.png',
+    './dist/icons/landing.png',
+    './dist/icons/bombtarget.png'
+]
 //HTML Elements
 const button = document.querySelector('.recenter-btn');
 const speedInput = document.querySelector('.flightSpeed');
 const mapChoice = document.querySelector('.mapchoice');
-const mapTitle = document.querySelector('h1');
+const mapTitle = document.querySelector('.map-title');
 const toggleBtn = document.querySelector('.toggle-btn');
 const navLinks = document.querySelector('.nav-link');
 const newFlight = document.querySelector('.newflight');
 const clearFlight = document.querySelector('.clearflight')
+const waypointSelector = document.querySelector('.waypointicon')
 
 //Gets Map Object Settings based on Map choice value
 function findMap(obj,hash){
@@ -235,7 +241,18 @@ let serverMarkers = []
 //Array of frontline coords
 let blueFrontline = []
 let redFrontline = []
-
+//Sets Default Waypoint Marker
+let waypointMarker = waypointIcons[0];
+let count = 0
+//Swaps through waypoints till selected
+waypointSelector.addEventListener('click',() =>{
+    waypointSelector.style.backgroundImage = `url(${waypointIcons[count]})`
+    waypointMarker = waypointIcons[count]
+    count++
+    if(count === 4){
+        count = 0
+    }
+})
 //Allows toggling on and off FLight Plan markers on map
 let flightPlan = L.layerGroup().addTo(map)
 
@@ -245,7 +262,13 @@ function createFlightPlan(){
         //Declares speed as speedInput value (Default value is 300kmph)
         let speed = speedInput.value;
         //Creates marker object and pushes it to the marker coordinates array
-        let point = new L.marker(e.latlng);
+        let point = new L.marker(e.latlng,{
+            icon: L.icon({
+                iconUrl: waypointMarker,
+                iconSize: [60,60],
+                iconAnchor: [25,50]
+            })
+        })
         let marker = {
             lat: e.latlng.lat,
             lng: e.latlng.lng,
@@ -424,7 +447,6 @@ function getCustomIcon(serverMarkers){
                 break;
             case 'taw-train':
                 if(point.color === 'red'){
-                    console.log("Red train")
                     selectIcon = mapIcons.redTrainIcon;
                 }else{
                     selectIcon = mapIcons.bluTrainIcon;

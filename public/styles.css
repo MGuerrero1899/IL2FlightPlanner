@@ -91,6 +91,10 @@ button.mapInput{
     background-image: url('./dist/mapinputs/clearflight.png');
     background-size: cover;
 }
+.waypointicon{
+    background-image: url('./dist/icons/waypoint.png');
+    background-size: cover;
+}
 .leaflet-marker-icon:not(:hover) {
     z-index: 0 !important;
   }
@@ -118,7 +122,8 @@ button.mapInput{
 
 .input-container{
     position: absolute;
-    height: 400px;
+    height: 600px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -155,7 +160,7 @@ button.mapInput{
         height: 100vh;
     }
     .input-container{
-        height: 350px;
+        height: 550px;
         width: 150px;
         top: 300px;
     }
@@ -193,5 +198,14 @@ button.mapInput{
     }
     .container{
         height: 75px;
+    }
+    .midpoint-label{
+        font-family: 'Roboto Mono', monospace;
+        min-width: 250px;
+        min-height: 1.3em;
+        font-size: 1.2em;
+        background-color: #fff;
+        box-shadow: 2px 2px 7px 2px #000000;
+        z-index: 900;
     }
 }
