@@ -120,10 +120,13 @@ const mapIcons = {
 }
 
 //HTML Elements
-const button = document.querySelector('.recenter');
-const speedInput = document.querySelector('#flightSpeed');
-const mapChoice = document.querySelector('#mapchoice');
+const button = document.querySelector('.recenter-btn');
+const speedInput = document.querySelector('.flightSpeed');
+const mapChoice = document.querySelector('.mapchoice');
 const mapTitle = document.querySelector('h1');
+const toggleBtn = document.querySelector('.toggle-btn');
+const navLinks = document.querySelector('.nav-link');
+const newFlight = document.querySelector('.newflight');
 
 //Gets Map Object Settings based on Map choice value
 function findMap(obj,hash){
@@ -210,6 +213,13 @@ mapChoice.addEventListener('change',async () => {
 button.addEventListener('click', () => {
     map.setView(mapIndex.mapCenter,mapIndex.defaultZoom)
 })
+//Toggles hamburger nav icon
+toggleBtn.addEventListener('click',() => {
+    navLinks.classList.toggle('active');
+})
+newFlight.addEventListener('click',() => {
+   createFlightPlan()
+})
 
 //Array of marker coordinates
 let markerCoords = []
@@ -221,50 +231,53 @@ let redFrontline = []
 
 //Allows toggling on and off FLight Plan markers on map
 let flightPlan = L.layerGroup().addTo(map)
-//Creates marker based on clicked location of map
-map.on('click',(e) => {
-    //Declares speed as speedInput value (Default value is 300kmph)
-    let speed = speedInput.value;
-    //Creates marker object and pushes it to the marker coordinates array
-    let point = new L.marker(e.latlng);
-    let marker = {
-        lat: e.latlng.lat,
-        lng: e.latlng.lng,
-    }
-    markerCoords.push(marker);
-    console.log(markerCoords);
-    //Adds a polyline to connect each point
-    const polyline = L.polyline(markerCoords, {color: 'red',weight: '3',dashArray: '20,20'});
-    //Adds marker and point to our FlightPlan
-    flightPlan.addLayer(point);
-    flightPlan.addLayer(polyline);
-    //Determines if there are atleast two marker points on map
-    if(markerCoords.length != 0){
-        //Loops through marker coordinates array and calculates midpoint,heading, and distance
-        for(let i = 0; i < markerCoords.length -1; i++){
-            let a = markerCoords[i];
-            let b = markerCoords[i + 1];
-            let midpoint = calcMidPoint(a,b);
-            let heading = calcHeading(a,b);
-            let distance = calcDistance(a,b);
-            let time = calcTime(speed,distance);
-            //if time is less than 1 min will display in seconds
-            let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`;
-            //Creates a transparent marker for the midpoint and sets text to display heading and distance
-            if(distance > 2){
-              let midpointMarker = new L.marker(midpoint,{
-                    opacity: 1,
-                    icon: L.divIcon({
-                        className: 'midpoint-label',
-                        html: `${heading}°|${distance}km|${timeToTarget}`
+
+function createFlightPlan(){
+     //Creates marker based on clicked location of map
+     map.on('click',(e) => {
+        //Declares speed as speedInput value (Default value is 300kmph)
+        let speed = speedInput.value;
+        //Creates marker object and pushes it to the marker coordinates array
+        let point = new L.marker(e.latlng);
+        let marker = {
+            lat: e.latlng.lat,
+            lng: e.latlng.lng,
+        }
+        markerCoords.push(marker);
+        //console.log(markerCoords);
+        //Adds a polyline to connect each point
+        const polyline = L.polyline(markerCoords, {color: 'red',weight: '3',dashArray: '20,20'});
+        //Adds marker and point to our FlightPlan
+        flightPlan.addLayer(point);
+        flightPlan.addLayer(polyline);
+        //Determines if there are atleast two marker points on map
+        if(markerCoords.length != 0){
+            //Loops through marker coordinates array and calculates midpoint,heading, and distance
+            for(let i = 0; i < markerCoords.length -1; i++){
+                let a = markerCoords[i];
+                let b = markerCoords[i + 1];
+                let midpoint = calcMidPoint(a,b);
+                let heading = calcHeading(a,b);
+                let distance = calcDistance(a,b);
+                let time = calcTime(speed,distance);
+                //if time is less than 1 min will display in seconds
+                let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`;
+                //Creates a transparent marker for the midpoint and sets text to display heading and distance
+                if(distance > 2){
+                let midpointMarker = new L.marker(midpoint,{
+                        opacity: 1,
+                        icon: L.divIcon({
+                            className: 'midpoint-label',
+                            html: `${heading}°|${distance}km|${timeToTarget}`
+                        })
                     })
-                })
-                flightPlan.addLayer(midpointMarker);
+                    flightPlan.addLayer(midpointMarker);
+                }
             }
         }
-    }
-})
+    })
 
+}
 //Calculates MidPoint between two map points
 function calcMidPoint(a,b){
     let lat = (b.lat + a.lat) / 2;

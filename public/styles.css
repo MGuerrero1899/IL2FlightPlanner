@@ -2,38 +2,100 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     flex-direction: column;
     height: 100%;
-    overflow: hidden;
+    margin: 0;
+    font-family: 'Roboto Slab', serif;
 }
-.container2{
+.nav-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    height: 100px;
+    background-color: #333;
 }
+.logo{
+    padding-left: 10px;
+}
+.nav-link{
+    list-style: none;
+    padding-right: 25px;
+}
+.nav-link li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.nav-link li a{
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+.toggle-btn{
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+.toggle-btn .bar{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.nav-link li a:hover{
+    top: -5px;
+}
+
 .container{
     display: flex;
-    flex-grow: 1;
+    height: 100px;
     width: 100%;
+    align-content: center;
+    justify-content: center;
+    background-color: #CB2027;
 }
-button, input,select{
+.map-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    font-weight: 700;
+    color: #fff;
+}
+.mapInput{
     pointer-events: auto;
 }
-button{
+button.mapInput{
     cursor: pointer;
+    height: 90px;
+    width: 90px;
+    border-radius: 10px;
+}
+.recenter-btn{
+    background-image: url('./dist/mapinputs/recenter.png');
+    background-size: cover;
+}
+.newflight{
+    background-image: url('./dist/mapinputs/newflightplan.png');
+    background-size: cover;
 }
 
 
 #mapid {
-    width: 100%;
-    height: 1280px;
+    display: flex;
+    width: 100vw;
+    height: 1024px;
     cursor: default;
 }
 
-h1{
-    text-align: center;
-    font-size: 50px;
-}
 .midpoint-label{
     font-family: 'Roboto Mono', monospace;
     min-width: 310px;
@@ -47,4 +109,83 @@ h1{
     font-family: 'Roboto Mono', monospace;
     padding-top: 25px;
     z-index: 400;
+}
+
+.input-container{
+    position: absolute;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 350px;
+    z-index: 999;
+}
+
+@media (max-width: 1024px){
+    .toggle-btn{
+        display: flex;
+    }
+    .nav-link{
+        display: none;
+        width: 100%;
+    }
+    .nav-container{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-link li a{
+        padding: .5rem 1rem;
+    }
+    .nav-link.active{
+        display: flex;
+    }
+    button.mapInput{
+        cursor: pointer;
+        height: 75px;
+        width: 75px;
+        border-radius: 10px;
+    }
+    #mapid{
+        height: 100vh;
+    }
+    .input-container{
+        height: 350px;
+        width: 150px;
+        top: 300px;
+    }
+    .container{
+        height: 100px;
+    }
+}
+
+@media (max-width: 500px){
+    .logo{
+        width: 320px;
+        padding: 0;
+    }
+    .nav-link{
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+    }
+    .map-title{
+        font-size: 50px;
+    }
+    button.mapInput{
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        border-radius: 10px;
+    }
+    #mapid{
+        height: 100vh;
+    }
+    .input-container{
+        height: 300px;
+        width: 100px;
+        top: 250px;
+    }
+    .container{
+        height: 75px;
+    }
 }

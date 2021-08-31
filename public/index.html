@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
@@ -15,22 +16,39 @@
     <title>IL-2FlightPlanner</title>
 </head>
 <body>
-    <div class="container2">
-        <h1>Stalingrad</h1>
+    <div class="nav-container">
+        <img src="./dist/logo/flightplannerlogo.png" alt="IL-2FlightPlanner logo" class="logo">
+        <a href="#" class="toggle-btn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <nav>
+            <ul class="nav-link">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Bombsight Calculator</a></li>
+                <li><a href="#">Plane Index</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
     </div>
-    <div class="container"></div>
-    <div class="container2">
+    <div class="container">
+        <h1 class="map-title">Stalingrad</h1>
+    </div>
+    <div class="map-container">
         <div id="mapid"></div>
-        <div class="leaflet-bottom leaflet-left">
-            <select name="mapchoice" id="mapchoice">
-                <option value="#stalingrad">Stalingrad</option>
-                <option value="#kuban">Kuban</option>
-                <option value="#moscow">Moscow</option>
-                <option value="#finnish">Finnish Virtual Server</option>
-            </select>
-            <button class="recenter">CENTER MAP</button>
-            <input type="number" value='300' id="flightSpeed">
-        </div>
+            <div class="input-container">
+                    <select name="mapchoice" id="mapchoice" class="mapchoice mapInput">
+                        <option value="#stalingrad">Stalingrad</option>
+                        <option value="#kuban">Kuban</option>
+                        <option value="#moscow">Moscow</option>
+                        <option value="#finnish">Finnish Virtual Server</option>
+                    </select>
+                    <button class="recenter-btn mapInput"></button>
+                    <button class="newflight mapInput"></button>
+                    <input type="number" value='300' id="flightSpeed" class="flightSpeed mapInput">
+                    <button class="acceptFlight">Accept</button>
+            </div>
     </div>
     </div>
 
