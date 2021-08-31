@@ -37,16 +37,18 @@
     </div>
     <div class="map-container">
         <div id="mapid"></div>
+        <div class="map-select">
+            <label for="mapchoice" class="map-label">
+                Select A Map
+                <select name="mapchoice" id="mapchoice" class="mapchoice mapInput">
+                    <option value="#stalingrad">Stalingrad</option>
+                    <option value="#kuban">Kuban</option>
+                    <option value="#moscow">Moscow</option>
+                    <option value="#finnish">Finnish Virtual Server</option>
+                </select>
+            </label>
+        </div>
             <div class="input-container">
-                <label for="mapchoice" class="map-label">
-                    Select A Map
-                    <select name="mapchoice" id="mapchoice" class="mapchoice mapInput">
-                        <option value="#stalingrad">Stalingrad</option>
-                        <option value="#kuban">Kuban</option>
-                        <option value="#moscow">Moscow</option>
-                        <option value="#finnish">Finnish Virtual Server</option>
-                    </select>
-                </label>
                     <button class="recenter-btn mapInput"></button>
                     <button class="newflight mapInput"></button>
                     <button class="clearflight mapInput"></button>

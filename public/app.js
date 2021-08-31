@@ -134,6 +134,8 @@ const navLinks = document.querySelector('.nav-link');
 const newFlight = document.querySelector('.newflight');
 const clearFlight = document.querySelector('.clearflight')
 const waypointSelector = document.querySelector('.waypointicon')
+const mapSelectDiv = document.querySelector('.map-select')
+const inputContainer = document.querySelector('.input-container')
 
 //Gets Map Object Settings based on Map choice value
 function findMap(obj,hash){
@@ -163,7 +165,29 @@ function clearMap(){
     targetGroup.clearLayers();
     frontlineLayer.clearLayers();
 }
-
+function shiftButton(){
+    if(navLinks.classList.contains('active')){
+        if(window.innerWidth <= 1024 && window.innerWidth >= 640){
+            mapSelectDiv.style.top = '215px'
+            inputContainer.style.top = '400px'
+        }else{
+            mapSelectDiv.style.top = '240px'
+            inputContainer.style.top = '320px'
+        }
+    }else{
+        if(window.innerWidth > 1024){
+            mapSelectDiv.style.top = '162px'
+            inputContainer.style.top = '300px'
+        }else if(window.innerWidth <= 1024 && window.innerWidth >= 640){
+            mapSelectDiv.style.top = '162px'
+            inputContainer.style.top = '300px'
+        }else{
+            mapSelectDiv.style.top = '125px'
+            inputContainer.style.top = '250px'
+        }
+    }
+    
+}
 //Default Map loaded is stalingrad
 let mapIndex = mapSettings.Stalingrad;
 
@@ -225,6 +249,14 @@ button.addEventListener('click', () => {
 //Toggles hamburger nav icon
 toggleBtn.addEventListener('click',() => {
     navLinks.classList.toggle('active');
+    shiftButton()
+})
+//Detects if window size changes
+window.addEventListener('resize',()=> {
+    if(navLinks.classList.contains('active') && window.innerWidth > 1024){
+        navLinks.classList.toggle('active')
+    }
+    shiftButton()
 })
 //Creates new flight
 newFlight.addEventListener('click',() => {
