@@ -160,12 +160,21 @@ button.mapInput{
         height: 100vh;
     }
     .input-container{
-        height: 550px;
+        height: 575px;
         width: 150px;
         top: 300px;
     }
     .container{
         height: 100px;
+    }
+    .midpoint-label{
+        min-width: 300px;
+        min-height: 1.3em;
+        font-size: 1.4em;
+    }
+    .map-label{
+        font-size: 25px;
+        font-weight: bold;
     }
 }
 
@@ -184,15 +193,15 @@ button.mapInput{
     }
     button.mapInput{
         cursor: pointer;
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 60px;
         border-radius: 10px;
     }
     #mapid{
         height: 100vh;
     }
     .input-container{
-        height: 300px;
+        height: 425px;
         width: 100px;
         top: 250px;
     }
@@ -200,12 +209,12 @@ button.mapInput{
         height: 75px;
     }
     .midpoint-label{
-        font-family: 'Roboto Mono', monospace;
         min-width: 250px;
         min-height: 1.3em;
         font-size: 1.2em;
-        background-color: #fff;
-        box-shadow: 2px 2px 7px 2px #000000;
-        z-index: 900;
+    }
+    .map-label{
+        font-size: 14px;
+        font-weight: bold;
     }
 }
