@@ -127,6 +127,7 @@ const mapTitle = document.querySelector('h1');
 const toggleBtn = document.querySelector('.toggle-btn');
 const navLinks = document.querySelector('.nav-link');
 const newFlight = document.querySelector('.newflight');
+const clearFlight = document.querySelector('.clearflight')
 
 //Gets Map Object Settings based on Map choice value
 function findMap(obj,hash){
@@ -140,9 +141,10 @@ function findMap(obj,hash){
         }
     }
 }
+//Clears map when map is changed
 function clearMap(){
     //Resets all marker arrays
-    markerCoords= []
+    markerCoords = []
     serverMarkers = []
     blueFrontline = []
     redFrontline = []
@@ -155,6 +157,7 @@ function clearMap(){
     targetGroup.clearLayers();
     frontlineLayer.clearLayers();
 }
+
 //Default Map loaded is stalingrad
 let mapIndex = mapSettings.Stalingrad;
 
@@ -186,7 +189,7 @@ let mapTiles = L.tileLayer(mapIndex.tiles, {
 )) */
 
 //Finds new map index everytime map is changed via dropdown
-mapChoice.addEventListener('change',async () => {
+mapChoice.addEventListener('change',async() => {
     if(mapChoice.value === '#finnish'){
         //Fetches finnish server json
         let data = await fetchData();
@@ -217,10 +220,14 @@ button.addEventListener('click', () => {
 toggleBtn.addEventListener('click',() => {
     navLinks.classList.toggle('active');
 })
+//Creates new flight
 newFlight.addEventListener('click',() => {
-   createFlightPlan()
+    createFlightPlan()
 })
-
+//Clears flight
+clearFlight.addEventListener('click',()=> {
+    clearFlightPlan()
+})
 //Array of marker coordinates
 let markerCoords = []
 //Array of server markers
@@ -276,7 +283,11 @@ function createFlightPlan(){
             }
         }
     })
-
+}
+//Clears flight plan on button push
+function clearFlightPlan(){
+    markerCoords = []
+    flightPlan.clearLayers()
 }
 //Calculates MidPoint between two map points
 function calcMidPoint(a,b){

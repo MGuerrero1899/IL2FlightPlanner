@@ -87,8 +87,13 @@ button.mapInput{
     background-image: url('./dist/mapinputs/newflightplan.png');
     background-size: cover;
 }
-
-
+.clearflight{
+    background-image: url('./dist/mapinputs/clearflight.png');
+    background-size: cover;
+}
+.leaflet-marker-icon:not(:hover) {
+    z-index: 0 !important;
+  }
 #mapid {
     display: flex;
     width: 100vw;
@@ -118,6 +123,7 @@ button.mapInput{
     flex-direction: column;
     justify-content: space-between;
     top: 350px;
+    left: 10px;
     z-index: 999;
 }
 
