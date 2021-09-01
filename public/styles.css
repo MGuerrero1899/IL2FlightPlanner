@@ -417,3 +417,15 @@ button.mapInput:active {
         font-size: 75px;
     }
 }
+@media (max-width:360px) {
+    .input-container .map-label{
+        width: 75px;
+        height: 80px;
+        font-size: 9px;
+        padding: 1px;
+    }
+    .logo{
+        width: 280px;
+        padding: 0;
+    }
+}
