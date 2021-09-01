@@ -145,7 +145,6 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     const button = document.querySelector('.recenter-btn');
     const speedInput = document.querySelector('.flightSpeed');
     const mapChoice = document.querySelector('.mapchoice');
-    const mapTitle = document.querySelector('.map-title');
     const newFlight = document.querySelector('.newflight');
     const clearFlight = document.querySelector('.clearflight')
     const waypointSelector = document.querySelector('.waypointicon')
@@ -183,21 +182,21 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     function shiftButton(){
         if(navLinks.classList.contains('active')){
             if(window.innerWidth <= 1024 && window.innerWidth >= 640){
-                mapSelectDiv.style.top = '215px'
+                mapSelectDiv.style.top = '115px'
                 inputContainer.style.top = '400px'
             }else{
-                mapSelectDiv.style.top = '240px'
+                mapSelectDiv.style.top = '145px'
                 inputContainer.style.top = '320px'
             }
         }else{
             if(window.innerWidth > 1024){
-                mapSelectDiv.style.top = '162px'
+                mapSelectDiv.style.top = '70px'
                 inputContainer.style.top = '300px'
             }else if(window.innerWidth <= 1024 && window.innerWidth >= 640){
-                mapSelectDiv.style.top = '162px'
+                mapSelectDiv.style.top = '65px'
                 inputContainer.style.top = '300px'
             }else{
-                mapSelectDiv.style.top = '125px'
+                mapSelectDiv.style.top = '50px'
                 inputContainer.style.top = '250px'
             }
         }
@@ -242,7 +241,6 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
         }
         //Sets map to changed map value
         mapIndex = findMap(mapSettings, mapChoice.value);
-        mapTitle.textContent = mapIndex.fullName;
         //Clears the map for new tiles
         clearMap();
         //Instantiates new selected map tiles
@@ -413,7 +411,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
 
     //fetches server json
     async function fetchData(){
-        const res = await fetch('http://stats.virtualpilots.fi:8000/static/output.json');
+        const res = await fetch('https://pacific-eyrie-84854.herokuapp.com/http://stats.virtualpilots.fi:8000/static/output.json');
         const data = await res.json();
         return data
     }
