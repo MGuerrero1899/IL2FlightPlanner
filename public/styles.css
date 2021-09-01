@@ -6,6 +6,7 @@ body{
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     background-color: #333;
     font-family: 'Roboto Slab', serif;
 }
@@ -21,9 +22,13 @@ body{
     width: 100%;
     background-color: #d2d2ca;
 }
+html{
+    height: 100%;
+    width: 100%;
+}
 #mapid {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     cursor: default;
 }
 .logo{
@@ -301,9 +306,6 @@ button.mapInput:active {
         width: 75px;
         border-radius: 10px;
     }
-    #mapid{
-        height: 100vh;
-    }
     .input-container{
         height: 145px;
         bottom: 10px;
@@ -368,9 +370,6 @@ button.mapInput:active {
         height: 55px;
         width: 55px;
         border-radius: 10px;
-    }
-    #mapid{
-        height: 100vh;
     }
     .input-container{
         display: flex;
