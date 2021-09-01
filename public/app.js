@@ -413,7 +413,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
 
     //fetches server json
     async function fetchData(){
-        const res = await fetch('output.json');
+        const res = await fetch('http://stats.virtualpilots.fi:8000/static/output.json');
         const data = await res.json();
         return data
     }
