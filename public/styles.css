@@ -2,43 +2,134 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
     height: 100%;
-    overflow: hidden;
+    background-color: #333;
+    font-family: 'Roboto Slab', serif;
 }
-.container2{
-    width: 100%;
-    height: 100px;
-}
-.container{
+.nav-container{
     display: flex;
-    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    background-color: #333;
 }
-button, input,select{
-    pointer-events: auto;
+.map-container{
+    height: 100%;
+    width: 100%;
+    background-color: #d2d2ca;
 }
-button{
-    cursor: pointer;
-}
-
-
 #mapid {
-    width: 100%;
-    height: 1280px;
+    height: 100vh;
+    width: 100vw;
     cursor: default;
 }
-
-h1{
-    text-align: center;
-    font-size: 50px;
+.logo{
+    padding-left: 10px;
 }
+.nav-link{
+    list-style: none;
+    padding-right: 25px;
+}
+.nav-link li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.nav-link li a{
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+.toggle-btn{
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+.toggle-btn .bar{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.nav-link li a:hover{
+    top: -5px;
+}
+
+.container{
+    display: flex;
+    height: 100px;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #CB2027;
+    border-bottom: 1px solid black;
+}
+.map-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    font-weight: 700;
+    color: #fff;
+}
+.mapInput{
+    pointer-events: auto;
+}
+button.mapInput{
+    cursor: pointer;
+    height: 90px;
+    width: 90px;
+    border-radius: 10px;
+    background-color: #d2d2ca;
+    box-shadow: 3px 3px #999;
+}
+button.mapInput:hover{
+    background-color: #8bd6e47a;
+}
+button.mapInput:active {
+    background-color: #8bd7e4be;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+.recenter-btn{
+    background-image: url('./dist/mapinputs/recenter.png');
+    background-size: cover;
+}
+.newflight{
+    background-image: url('./dist/mapinputs/newflightplan.png');
+    background-size: cover;
+}
+.clearflight{
+    background-image: url('./dist/mapinputs/clearflight.png');
+    background-size: cover;
+}
+.waypointicon{
+    background-image: url('./dist/icons/waypoint.png');
+    background-size: cover;
+}
+.leaflet-marker-icon:not(:hover) {
+    z-index: 0 !important;
+  }
+
 .midpoint-label{
     font-family: 'Roboto Mono', monospace;
     min-width: 310px;
     min-height: 1.5em;
     font-size: 1.5em;
+    position: absolute;
+    left: -120px;
     background-color: #fff;
     box-shadow: 2px 2px 7px 2px #000000;
     z-index: 900;
@@ -47,4 +138,252 @@ h1{
     font-family: 'Roboto Mono', monospace;
     padding-top: 25px;
     z-index: 400;
+}
+
+.input-container{
+    position: absolute;
+    height: 600px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 350px;
+    left: 10px;
+    z-index: 999;
+}
+.map-select{
+    position: absolute;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+    padding: 8px 15px;
+    height: 50px;
+    width: 150px;
+    top: 162px;
+    left: 75px;
+    z-index: 999;
+}
+.mapchoice{
+    padding: 5px 3px;
+    margin-top: 3px;
+}
+.map-label{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+    color: white;
+    background-color: #333;
+    border-radius: 16px;
+}
+.flightSpeed{
+    width: 100px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+.main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #333;
+}
+.contact-form{
+    max-width: 500px;
+    margin: 32px auto;
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 10px;
+}
+.contact-form label{
+    display: block;
+    color: black;
+    font-size: 30px;
+    padding: 8px 0;
+    border-radius: 5px;
+}
+.contact-form input,textarea{
+    display: block;
+    font-size: 25px;
+    width: 100%;
+}
+.contact-form button{
+    border: 0;
+    border-radius: 16px;
+    background-color: #cb2026;
+    padding: 8px;
+    color: #fff;
+    margin: 16px 0;
+    font-size: 25px;
+    width: auto;
+    cursor: pointer;
+}
+.contact-form button:hover{
+    background-color: #c46265;
+}
+.contact-form button:active{
+    transform: translateY(4px);
+}
+.form-info{
+    width: 300px;
+    margin: 32px auto 32px 0;
+    padding: 32px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.contact-list{
+    list-style: none;
+}
+.form-info h3{
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+.contact-list li{
+    font-size: 16px;
+    padding: 35px 10px 35px 10px;
+    border-bottom: 1px solid black;
+}
+.inprogress{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.inprogress h1{
+    color: #fff;
+    font-size: 125px;
+}
+
+@media (max-width: 1024px){
+    .toggle-btn{
+        display: flex;
+    }
+    .nav-link{
+        display: none;
+        width: 100%;
+    }
+    .nav-container{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-link li a{
+        padding: .5rem 1rem;
+    }
+    .nav-link.active{
+        display: flex;
+    }
+    button.mapInput{
+        cursor: pointer;
+        height: 75px;
+        width: 75px;
+        border-radius: 10px;
+    }
+    #mapid{
+        height: 100vh;
+    }
+    .input-container{
+        height: 575px;
+        width: 150px;
+        top: 300px;
+    }
+    .container{
+        height: 100px;
+    }
+    .midpoint-label{
+        min-width: 300px;
+        min-height: 1.3em;
+        font-size: 1.4em;
+    }
+    .map-label{
+        font-size: 20px;
+        font-weight: normal;
+        width: 100px;
+    }
+    .map-select{
+        border-radius: 10px;
+        padding: 5px 8px;
+        height: 65px;
+        width: 160px;
+        top: 162px;
+        left: 75px;
+    }
+    .flightSpeed{
+        width: 75px;
+        margin-left: 5px;
+    }
+    .contact-form{
+        max-width: 400px;
+        margin: 32px auto;
+    }
+    .contact-form label{
+        font-size: 25px;
+    }
+    .form-info{
+        width: 300px;
+        margin: 32px auto;
+        padding: 32px;
+    }
+}
+
+@media (max-width: 640px){
+    .logo{
+        width: 320px;
+        padding: 0;
+    }
+    .nav-link{
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+    }
+    .map-title{
+        font-size: 50px;
+    }
+    button.mapInput{
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+        border-radius: 10px;
+    }
+    #mapid{
+        height: 100vh;
+    }
+    .input-container{
+        height: 400px;
+        width: 100px;
+        top: 250px;
+    }
+    .container{
+        height: 75px;
+    }
+    .midpoint-label{
+        min-width: 250px;
+        min-height: 1.3em;
+        font-size: 1.2em;
+    }
+    .map-label{
+        font-size: 14px;
+        padding-bottom: 5px;
+        width: 70px;
+        height: 85px;
+    }
+    .map-select{
+        border-radius: 10px;
+        padding: 5px 8px;
+        height: 55px;
+        width: 160px;
+        top: 125px;
+        left: 70px;
+    }
+    .flightSpeed{
+        width: 50px;
+        margin: 5px 0;
+        font-size: 12px;
+    }
+    .contact-title{
+        font-size: 45px;
+    }
+    .inprogress h1{
+        color: #fff;
+        font-size: 75px;
+    }
 }
