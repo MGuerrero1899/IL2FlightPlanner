@@ -243,7 +243,16 @@ button.mapInput:active {
     padding: 35px 10px 35px 10px;
     border-bottom: 1px solid black;
 }
-
+.inprogress{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.inprogress h1{
+    color: #fff;
+    font-size: 125px;
+}
 
 @media (max-width: 1024px){
     .toggle-btn{
@@ -372,5 +381,9 @@ button.mapInput:active {
     }
     .contact-title{
         font-size: 45px;
+    }
+    .inprogress h1{
+        color: #fff;
+        font-size: 75px;
     }
 }

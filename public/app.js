@@ -133,7 +133,7 @@ switch(currentPage){
         ]
         flightPlanner(mapSettings,mapIcons,waypointIcons)
         break;
-    case '/Contact':
+    case '/contact':
         toggleBtn.addEventListener('click',() => {
             navLinks.classList.toggle('active');
         })
