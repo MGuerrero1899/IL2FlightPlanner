@@ -11,6 +11,9 @@ const publicPath = path.join(__dirname, 'public')
 app.get('/',(req,res) => {
     res.sendFile(publicPath + '/index.html');
 })
+app.get('/Contact',(req,res) => {
+    res.sendFile(publicPath + '/html/contact.html');
+})
 app.listen(PORT,() => {
     console.log(`Server Running on PORT ${PORT}`);
 })

@@ -3,8 +3,10 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
     margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #333;
     font-family: 'Roboto Slab', serif;
 }
 .nav-container{
@@ -13,6 +15,16 @@ body{
     align-items: center;
     width: 100%;
     background-color: #333;
+}
+.map-container{
+    height: 100%;
+    width: 100%;
+    background-color: #d2d2ca;
+}
+#mapid {
+    height: 100vh;
+    width: 100vw;
+    cursor: default;
 }
 .logo{
     padding-left: 10px;
@@ -60,6 +72,7 @@ body{
     width: 100%;
     align-content: center;
     justify-content: center;
+    color: #fff;
     background-color: #CB2027;
     border-bottom: 1px solid black;
 }
@@ -109,18 +122,14 @@ button.mapInput:active {
 .leaflet-marker-icon:not(:hover) {
     z-index: 0 !important;
   }
-#mapid {
-    display: flex;
-    width: 100vw;
-    height: 1024px;
-    cursor: default;
-}
 
 .midpoint-label{
     font-family: 'Roboto Mono', monospace;
     min-width: 310px;
     min-height: 1.5em;
     font-size: 1.5em;
+    position: absolute;
+    left: -120px;
     background-color: #fff;
     box-shadow: 2px 2px 7px 2px #000000;
     z-index: 900;
@@ -171,6 +180,70 @@ button.mapInput:active {
     margin-left: 10px;
     font-size: 20px;
 }
+.main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #333;
+}
+.contact-form{
+    max-width: 500px;
+    margin: 32px auto;
+    background-color: #fff;
+    padding: 32px;
+    border-radius: 10px;
+}
+.contact-form label{
+    display: block;
+    color: black;
+    font-size: 30px;
+    padding: 8px 0;
+    border-radius: 5px;
+}
+.contact-form input,textarea{
+    display: block;
+    font-size: 25px;
+    width: 100%;
+}
+.contact-form button{
+    border: 0;
+    border-radius: 16px;
+    background-color: #cb2026;
+    padding: 8px;
+    color: #fff;
+    margin: 16px 0;
+    font-size: 25px;
+    width: auto;
+    cursor: pointer;
+}
+.contact-form button:hover{
+    background-color: #c46265;
+}
+.contact-form button:active{
+    transform: translateY(4px);
+}
+.form-info{
+    width: 300px;
+    margin: 32px auto 32px 0;
+    padding: 32px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.contact-list{
+    list-style: none;
+}
+.form-info h3{
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+.contact-list li{
+    font-size: 16px;
+    padding: 35px 10px 35px 10px;
+    border-bottom: 1px solid black;
+}
+
 
 @media (max-width: 1024px){
     .toggle-btn{
@@ -229,7 +302,18 @@ button.mapInput:active {
         width: 75px;
         margin-left: 5px;
     }
-    
+    .contact-form{
+        max-width: 400px;
+        margin: 32px auto;
+    }
+    .contact-form label{
+        font-size: 25px;
+    }
+    .form-info{
+        width: 300px;
+        margin: 32px auto;
+        padding: 32px;
+    }
 }
 
 @media (max-width: 640px){
@@ -286,5 +370,7 @@ button.mapInput:active {
         margin: 5px 0;
         font-size: 12px;
     }
-    
+    .contact-title{
+        font-size: 45px;
+    }
 }
