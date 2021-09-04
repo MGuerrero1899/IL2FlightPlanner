@@ -6,6 +6,7 @@ body{
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     background-color: #333;
     font-family: 'Roboto Slab', serif;
 }
@@ -21,9 +22,13 @@ body{
     width: 100%;
     background-color: #d2d2ca;
 }
+html{
+    height: 100%;
+    width: 100%;
+}
 #mapid {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     cursor: default;
 }
 .logo{
@@ -76,7 +81,7 @@ body{
     background-color: #CB2027;
     border-bottom: 1px solid black;
 }
-.map-title{
+.content-title{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,14 +147,22 @@ button.mapInput:active {
 
 .input-container{
     position: absolute;
-    height: 600px;
-    width: 150px;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    bottom: 0;
+    z-index: 999;
+}
+.input-container .map-label{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    top: 350px;
-    left: 10px;
-    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 75px;
+    width: 225px;
 }
 .map-select{
     position: absolute;
@@ -157,9 +170,9 @@ button.mapInput:active {
     color: white;
     border-radius: 10px;
     padding: 8px 15px;
-    height: 50px;
-    width: 150px;
-    top: 162px;
+    height: 60px;
+    width: 160px;
+    top: 70px;
     left: 75px;
     z-index: 999;
 }
@@ -176,9 +189,24 @@ button.mapInput:active {
     border-radius: 16px;
 }
 .flightSpeed{
-    width: 100px;
-    margin-left: 10px;
+    width: 50%;
+    display: inline;
     font-size: 20px;
+}
+.convertspeed{
+    border-radius: 16px;
+    margin-left: auto;
+    cursor: pointer;
+    color: #fff;
+    background-color: #CB2027;
+    border: none;
+    box-shadow: 1px 1px #999;
+}
+.convertspeed:hover{
+    background-color: #c46265;
+}
+.convertspeed:active{
+    transform: translateY(4px);
 }
 .main-container{
     width: 100%;
@@ -278,34 +306,33 @@ button.mapInput:active {
         width: 75px;
         border-radius: 10px;
     }
-    #mapid{
-        height: 100vh;
-    }
     .input-container{
-        height: 575px;
-        width: 150px;
-        top: 300px;
+        height: 145px;
+        bottom: 10px;
     }
     .container{
         height: 100px;
     }
     .midpoint-label{
-        min-width: 300px;
-        min-height: 1.3em;
-        font-size: 1.4em;
+        min-width: 275px;
+        min-height: 1.2em;
+        font-size: 1.3em;
     }
     .map-label{
         font-size: 20px;
         font-weight: normal;
         width: 100px;
     }
+    .input-container .map-label{
+        width: 225px;
+        font-size: 18px;
+    }
     .map-select{
         border-radius: 10px;
         padding: 5px 8px;
         height: 65px;
         width: 160px;
-        top: 162px;
-        left: 75px;
+        top: 65px;
     }
     .flightSpeed{
         width: 75px;
@@ -335,30 +362,27 @@ button.mapInput:active {
         flex-direction: column;
         text-align: center;
     }
-    .map-title{
+    .content-title{
         font-size: 50px;
     }
     button.mapInput{
         cursor: pointer;
-        height: 60px;
-        width: 60px;
+        height: 55px;
+        width: 55px;
         border-radius: 10px;
     }
-    #mapid{
-        height: 100vh;
-    }
     .input-container{
-        height: 400px;
-        width: 100px;
-        top: 250px;
+        display: flex;
+        flex-wrap: wrap;
+        height: 150px;
     }
     .container{
         height: 75px;
     }
     .midpoint-label{
-        min-width: 250px;
-        min-height: 1.3em;
-        font-size: 1.2em;
+        min-width: 225px;
+        min-height: 1.2em;
+        font-size: 1.1em;
     }
     .map-label{
         font-size: 14px;
@@ -366,17 +390,22 @@ button.mapInput:active {
         width: 70px;
         height: 85px;
     }
+    .input-container .map-label{
+        width: 100px;
+        height: 90px;
+        font-size: 10px;
+        padding: 3px;
+    }
     .map-select{
         border-radius: 10px;
         padding: 5px 8px;
         height: 55px;
         width: 160px;
-        top: 125px;
+        top: 50px;
         left: 70px;
     }
     .flightSpeed{
         width: 50px;
-        margin: 5px 0;
         font-size: 12px;
     }
     .contact-title{
@@ -385,5 +414,17 @@ button.mapInput:active {
     .inprogress h1{
         color: #fff;
         font-size: 75px;
+    }
+}
+@media (max-width:360px) {
+    .input-container .map-label{
+        width: 75px;
+        height: 80px;
+        font-size: 9px;
+        padding: 1px;
+    }
+    .logo{
+        width: 280px;
+        padding: 0;
     }
 }
