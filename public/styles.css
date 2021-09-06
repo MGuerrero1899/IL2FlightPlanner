@@ -130,7 +130,7 @@ button.mapInput:active {
 
 .midpoint-label{
     font-family: 'Roboto Mono', monospace;
-    min-width: 310px;
+    min-width: 320px;
     min-height: 1.5em;
     font-size: 1.5em;
     position: absolute;
@@ -374,7 +374,7 @@ button.mapInput:active {
     .input-container{
         display: flex;
         flex-wrap: wrap;
-        height: 150px;
+        height: 100px;
     }
     .container{
         height: 75px;
