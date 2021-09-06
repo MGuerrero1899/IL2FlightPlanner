@@ -73,6 +73,88 @@ switch(currentPage){
                 mapCenter:[-138,142],
                 tiles: "dist/new_stalingrad/{z}/{x}/{y}.png" //location of tiles for selected map
             },
+            Rheinland:{
+                fullName: 'Rheinland',
+                name: 'rheinland',
+                hash: '#rheinland',
+                indexID: 3,
+                latMin: -231,//Bottom left latitude
+                latMax: -24,//Top Right latitude
+                latGridMax: 32,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 40,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 3,
+                maxZoom: 6,
+                latOffset: 304,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 6, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 6, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                scale: 1.8473,
+                originalSize: 126.05,
+                mapCenter:[-123,115],
+                tiles: "dist/new_rheinland/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
+            Luki:{
+                fullName: 'Luki',
+                name: 'luki',
+                hash: '#luki',
+                indexID: 4,
+                latMin: -208,//Bottom left latitude
+                latMax: -48,//Top Right latitude
+                latGridMax: 10,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 17,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 3,
+                maxZoom: 5,
+                latOffset: 306,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 14, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 14, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                mapCenter:[-117,122],
+                tiles: "dist/new_luki/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
+            Arras:{
+                fullName: 'Arras',
+                name: 'arras',
+                hash: '#arras',
+                indexID: 5,
+                latMin: -208,//Bottom left latitude
+                latMax: -48,//Top Right latitude
+                latGridMax: 10,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 17,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 2,
+                maxZoom: 5,
+                latOffset: 306,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 20, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 20, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                mapCenter:[-117,122],
+                tiles: "dist/new_arras/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
+            Prokhorovka:{
+                fullName: 'Prokhorovka',
+                name: 'prokhorovka',
+                hash: '#prokhorovka',
+                indexID: 6,
+                latMin: -256,//Bottom left latitude
+                latMax: -0,//Top Right latitude
+                latGridMax: 11,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 11,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 2,
+                maxZoom: 5,
+                latOffset: 256,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 22, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 22, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                mapCenter:[-117,122],
+                tiles: "dist/new_prokhorovka/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
         }
         //Declare Icons
         const mapIcons = {
@@ -302,13 +384,13 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     let redFrontline = []
     //Sets Default Waypoint Marker
     let waypointMarker = waypointIcons[0];
-    let count = 0
+    let count = 1
     //Swaps through waypoints till selected
     waypointSelector.addEventListener('click',() =>{
         waypointSelector.style.backgroundImage = `url(${waypointIcons[count]})`
         waypointMarker = waypointIcons[count]
         count++
-        if(count === 4){
+        if(count === waypointIcons.length){
             count = 0
         }
     })
@@ -446,7 +528,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
 
     //fetches server json
     async function fetchData(){
-        const res = await fetch('https://pacific-eyrie-84854.herokuapp.com/http://stats.virtualpilots.fi:8000/static/output.json');
+        const res = await fetch ('https://pacific-eyrie-84854.herokuapp.com/http://stats.virtualpilots.fi:8000/static/output.json');
         const data = await res.json();
         return data
     }
@@ -657,8 +739,4 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     }
     //Adds our layers to the map
     L.control.layers(null,overlay).addTo(map);
-}
-
-function contactSubmit(){
-    console.log('Submitted')
 }
