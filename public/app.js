@@ -10,7 +10,7 @@ switch(currentPage){
             Moscow:{
                 fullName: 'Moscow',
                 name: 'moscow',
-                hash: '#moscow',
+                hash: '#moscow', //Selected map hash value
                 indexID: 0,
                 latMin: -256,//Top left latitude
                 latMax: 0, //Bottom Right latitude
@@ -73,6 +73,88 @@ switch(currentPage){
                 mapCenter:[-138,142],
                 tiles: "dist/new_stalingrad/{z}/{x}/{y}.png" //location of tiles for selected map
             },
+            Rheinland:{
+                fullName: 'Rheinland',
+                name: 'rheinland',
+                hash: '#rheinland',
+                indexID: 3,
+                latMin: -231,//Bottom left latitude
+                latMax: -24,//Top Right latitude
+                latGridMax: 32,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 40,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 3,
+                maxZoom: 6,
+                latOffset: 304,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 6, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 6, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                scale: 1.8473,
+                originalSize: 126.05,
+                mapCenter:[-123,115],
+                tiles: "./dist/new_rheinland/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
+            Luki:{
+                fullName: 'Luki',
+                name: 'luki',
+                hash: '#luki',
+                indexID: 4,
+                latMin: -208,//Bottom left latitude
+                latMax: -48,//Top Right latitude
+                latGridMax: 10,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 17,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 3,
+                maxZoom: 5,
+                latOffset: 306,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 14, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 14, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                mapCenter:[-117,122],
+                tiles: "./dist/new_luki/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
+            Arras:{
+                fullName: 'Arras',
+                name: 'arras',
+                hash: '#arras',
+                indexID: 5,
+                latMin: -208,//Bottom left latitude
+                latMax: -48,//Top Right latitude
+                latGridMax: 10,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 17,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 2,
+                maxZoom: 5,
+                latOffset: 306,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 20, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 20, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                mapCenter:[-117,122],
+                tiles: "./dist/new_arras/{z}/{x}/{y}.png" //location of tiles for selected map
+            },
+            Prokhorovka:{
+                fullName: 'Prokhorovka',
+                name: 'prokhorovka',
+                hash: '#prokhorovka',
+                indexID: 6,
+                latMin: -256,//Bottom left latitude
+                latMax: -0,//Top Right latitude
+                latGridMax: 11,//Total number of grids tall
+                lngMin: 0,//Bottom Left longitude
+                lngMax: 256,//Top Right Longitude
+                lngGridMax: 11,//Total number of grids wide
+                defaultZoom: 4,
+                minZoom: 2,
+                maxZoom: 5,
+                latOffset: 256,//Latitude offset of the map in order to find correct heading (Prevents negative latitude) formula is (latMax * 2) + 256
+                latScale: 22, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
+                lngScale: 22, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
+                mapCenter:[-117,122],
+                tiles: "./dist/new_prokhorovka/{z}/{x}/{y}.png" //location of tiles for selected map
+            }
         }
         //Declare Icons
         const mapIcons = {
@@ -145,12 +227,13 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     const button = document.querySelector('.recenter-btn');
     const speedInput = document.querySelector('.flightSpeed');
     const mapChoice = document.querySelector('.mapchoice');
-    const mapTitle = document.querySelector('.map-title');
     const newFlight = document.querySelector('.newflight');
     const clearFlight = document.querySelector('.clearflight')
     const waypointSelector = document.querySelector('.waypointicon')
     const mapSelectDiv = document.querySelector('.map-select')
     const inputContainer = document.querySelector('.input-container')
+    const convertSpeed = document.querySelector('.convertspeed')
+    const speedLabel = document.querySelector('.speed-label');
 
     //Gets Map Object Settings based on Map choice value
     function findMap(obj,hash){
@@ -183,28 +266,29 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     function shiftButton(){
         if(navLinks.classList.contains('active')){
             if(window.innerWidth <= 1024 && window.innerWidth >= 640){
-                mapSelectDiv.style.top = '215px'
-                inputContainer.style.top = '400px'
+                mapSelectDiv.style.top = '115px'
+                inputContainer.style.bottom = '-50px'
             }else{
-                mapSelectDiv.style.top = '240px'
-                inputContainer.style.top = '320px'
+                mapSelectDiv.style.top = '145px'
+                //inputContainer.style.top = '320px'
             }
         }else{
             if(window.innerWidth > 1024){
-                mapSelectDiv.style.top = '162px'
-                inputContainer.style.top = '300px'
+                mapSelectDiv.style.top = '70px'
             }else if(window.innerWidth <= 1024 && window.innerWidth >= 640){
-                mapSelectDiv.style.top = '162px'
-                inputContainer.style.top = '300px'
+                mapSelectDiv.style.top = '65px'
+                inputContainer.style.bottom = '10px'
             }else{
-                mapSelectDiv.style.top = '125px'
-                inputContainer.style.top = '250px'
+                mapSelectDiv.style.top = '50px'
+                inputContainer.style.bottom = '0'
             }
         }
         
     }
     //Default Map loaded is stalingrad
     let mapIndex = mapSettings.Stalingrad;
+    //Default speed measurement
+    let speedMeasurement = ' km/h';
     //Declares SW and NE border of image map in pixels
     let mapSW = [8192,0],
         mapNE = [0,8192],
@@ -242,7 +326,6 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
         }
         //Sets map to changed map value
         mapIndex = findMap(mapSettings, mapChoice.value);
-        mapTitle.textContent = mapIndex.fullName;
         //Clears the map for new tiles
         clearMap();
         //Instantiates new selected map tiles
@@ -267,9 +350,22 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     //Detects if window size changes
     window.addEventListener('resize',()=> {
         if(navLinks.classList.contains('active') && window.innerWidth > 1024){
-            navLinks.classList.toggle('active')
+            navLinks.classList.toggle('active');
         }
         shiftButton()
+    })
+    convertSpeed.addEventListener('click',() => {
+        if(isImperial()){
+            convertSpeed.classList.remove('active');
+            speedMeasurement = 'km/h';
+            speedLabel.textContent = 'Current Airspeed (km/h)';
+            convertSpeed.textContent = 'MPH';
+        }else{
+            convertSpeed.classList.toggle('active');
+            speedMeasurement = 'mph';
+            speedLabel.textContent = 'Current Airspeed (mph)'
+            convertSpeed.textContent = 'KM/H';
+        }
     })
     //Creates new flight
     newFlight.addEventListener('click',() => {
@@ -288,13 +384,13 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     let redFrontline = []
     //Sets Default Waypoint Marker
     let waypointMarker = waypointIcons[0];
-    let count = 0
+    let count = 1
     //Swaps through waypoints till selected
     waypointSelector.addEventListener('click',() =>{
         waypointSelector.style.backgroundImage = `url(${waypointIcons[count]})`
         waypointMarker = waypointIcons[count]
         count++
-        if(count === 4){
+        if(count === waypointIcons.length){
             count = 0
         }
     })
@@ -319,6 +415,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
                 lng: e.latlng.lng,
             }
             markerCoords.push(marker);
+	    //markercoords debugging
             //console.log(markerCoords);
             //Adds a polyline to connect each point
             const polyline = L.polyline(markerCoords, {color: 'red',weight: '3',dashArray: '20,20'});
@@ -336,14 +433,18 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
                     let distance = calcDistance(a,b);
                     let time = calcTime(speed,distance);
                     //if time is less than 1 min will display in seconds
-                    let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}km/h`;
+                    let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}${speedMeasurement}`;
+                    let label = `${heading}°|${distance}km|${timeToTarget}`
+                    if(isImperial()){
+                        label = `${heading}°|${(distance * 0.62).toFixed(2)}mi|${timeToTarget}`
+                    }
                     //Creates a transparent marker for the midpoint and sets text to display heading and distance
                     if(distance > 2){
                     let midpointMarker = new L.marker(midpoint,{
                             opacity: 1,
                             icon: L.divIcon({
                                 className: 'midpoint-label',
-                                html: `${heading}°|${distance}km|${timeToTarget}`
+                                html: label
                             })
                         })
                         flightPlan.addLayer(midpointMarker);
@@ -351,6 +452,14 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
                 }
             }
         })
+    }
+    //Tells if measurements are in metric or imperial
+    function isImperial(){
+        if(convertSpeed.classList.contains('active')){
+            return true;
+        }else{
+            return false;
+        }
     }
     //Clears flight plan on button push
     function clearFlightPlan(){
@@ -392,8 +501,15 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     function calcTime(speed,distance){
         //Seconds in an Hour
         const minInHr = 60;
-        let kmPerMin = speed / minInHr;
-        return distance / kmPerMin;
+        const miInKm = 0.6213;
+        if(isImperial()){
+            let totalMiles = distance * miInKm;
+            let miPerMin = speed / minInHr;
+            return totalMiles / miPerMin;
+        }else{
+            let kmPerMin = speed / minInHr;
+            return distance / kmPerMin;
+        }
 
     }
     //Converts Server JSON (lat,lng) points to respective point on map
@@ -413,7 +529,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
 
     //fetches server json
     async function fetchData(){
-        const res = await fetch('output.json');
+        const res = await fetch ('https://pacific-eyrie-84854.herokuapp.com/http://stats.virtualpilots.fi:8000/static/output.json');
         const data = await res.json();
         return data
     }
@@ -624,8 +740,4 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     }
     //Adds our layers to the map
     L.control.layers(null,overlay).addTo(map);
-}
-
-function contactSubmit(){
-    console.log('Submitted')
 }
