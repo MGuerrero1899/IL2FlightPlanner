@@ -93,11 +93,7 @@ switch(currentPage){
                 scale: 1.8473,
                 originalSize: 126.05,
                 mapCenter:[-123,115],
-<<<<<<< HEAD
                 tiles: "./dist/new_rheinland/{z}/{x}/{y}.png" //location of tiles for selected map
-=======
-                tiles: "dist/new_rheinland/{z}/{x}/{y}.png" //location of tiles for selected map
->>>>>>> e9631cc364e565d81794fe77bbaa6e3a80f27781
             },
             Luki:{
                 fullName: 'Luki',
@@ -117,11 +113,7 @@ switch(currentPage){
                 latScale: 14, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
                 lngScale: 14, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
                 mapCenter:[-117,122],
-<<<<<<< HEAD
                 tiles: "./dist/new_luki/{z}/{x}/{y}.png" //location of tiles for selected map
-=======
-                tiles: "dist/new_luki/{z}/{x}/{y}.png" //location of tiles for selected map
->>>>>>> e9631cc364e565d81794fe77bbaa6e3a80f27781
             },
             Arras:{
                 fullName: 'Arras',
@@ -141,11 +133,7 @@ switch(currentPage){
                 latScale: 20, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
                 lngScale: 20, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
                 mapCenter:[-117,122],
-<<<<<<< HEAD
                 tiles: "./dist/new_arras/{z}/{x}/{y}.png" //location of tiles for selected map
-=======
-                tiles: "dist/new_arras/{z}/{x}/{y}.png" //location of tiles for selected map
->>>>>>> e9631cc364e565d81794fe77bbaa6e3a80f27781
             },
             Prokhorovka:{
                 fullName: 'Prokhorovka',
@@ -165,13 +153,8 @@ switch(currentPage){
                 latScale: 22, //This is the latitude scale of each grid in game (Each grid in game is 10km tall)
                 lngScale: 22, //This is the longitude scale of each grid in game (Each grid in game is 10km wide)
                 mapCenter:[-117,122],
-<<<<<<< HEAD
                 tiles: "./dist/new_prokhorovka/{z}/{x}/{y}.png" //location of tiles for selected map
             }
-=======
-                tiles: "dist/new_prokhorovka/{z}/{x}/{y}.png" //location of tiles for selected map
-            },
->>>>>>> e9631cc364e565d81794fe77bbaa6e3a80f27781
         }
         //Declare Icons
         const mapIcons = {
