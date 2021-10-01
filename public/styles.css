@@ -89,41 +89,10 @@ html{
     font-weight: 700;
     color: #fff;
 }
-.mapInput{
+.map-input{
     pointer-events: auto;
 }
-button.mapInput{
-    cursor: pointer;
-    height: 90px;
-    width: 90px;
-    border-radius: 10px;
-    background-color: #d2d2ca;
-    box-shadow: 3px 3px #999;
-}
-button.mapInput:hover{
-    background-color: #8bd6e47a;
-}
-button.mapInput:active {
-    background-color: #8bd7e4be;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-  }
-.recenter-btn{
-    background-image: url('./dist/mapinputs/recenter.png');
-    background-size: cover;
-}
-.newflight{
-    background-image: url('./dist/mapinputs/newflightplan.png');
-    background-size: cover;
-}
-.clearflight{
-    background-image: url('./dist/mapinputs/clearflight.png');
-    background-size: cover;
-}
-.waypointicon{
-    background-image: url('./dist/icons/waypoint.png');
-    background-size: cover;
-}
+
 .leaflet-marker-icon:not(:hover) {
     z-index: 0 !important;
   }
@@ -146,23 +115,161 @@ button.mapInput:active {
 }
 
 .input-container{
+    display: none;
+}
+.input-container.active{
     position: absolute;
-    height: 120px;
-    width: 100%;
+    height: 96%;
+    width: 250px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: 1s;
+    right: -250px;
+    animation: slide 0.5s forwards;
     bottom: 0;
+    background-color: #333;
     z-index: 999;
 }
-.input-container .map-label{
+@keyframes slide {
+    100% { right: 0; }
+}
+.input-container h2{
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+.input-btns{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-wrap: 1;
+    padding: 25px 0;
+}
+.input-tools{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 20px 0;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 10px 0;
+    color: white;
+    font-size: 25px;
+}
+.map-input{
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+.map-input:hover{
+    transform: scale(.95);
+}
+.waypoint-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./dist/icons/waypoint.png');
+    background-size: cover;
+    background-color: white;
+    height: 50px;
+    width: 50px;
+}
+.map-label{
+    background-color: #333;
+}
+.flight-speed{
+    text-align: center;
+    margin-left: 25px;
+    width: 50%;
+    display: inline;
+    font-size: 20px;
+}
+.speed-label{
+    color: white;
+    padding-left: 25px;
+    text-align: center;
+}
+.convertspeed{
+    height: 30px;
+    font-size: 20px;
+    margin-left: auto;
+    cursor: pointer;
+    color: white;
+    background-color: red;
+    border: none;
+    transition: all .2s;
+}
+.convertspeed:hover{
+    background-color: #f06161;
+    font-size: 18px;
+}
+.convertspeed:active{
+    transform: translateY(1px);
+}
+.toolbar-btn{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 50px;
+    right: 100px;
+    height: 50px;
+    width: 50px;
+    background-color: #333;
+    color: white;
+    font-size: 25px;
+    border-radius: 50%;
+    box-shadow: 2px 0 0 2px #e7dbdb;
+    z-index: 999;
+    transition: all .2s ease-in-out;
+}
+.toolbar-btn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.toolbar-close{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: red;
+    font-size: 30px;
+    transition: transform .5s;
+}
+.flight-controls{
+    margin-bottom: 100px;
+}
+.accept-flight{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 75px;
-    width: 225px;
+}
+.flight-controls button{
+    width: 50px;
+    height: 50px;
+    background-color: #1de41d;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #fff;
+    align-self: center;
+    box-shadow: 1px 0 0 1px #1f1e1e;
+    transition: all .2s ease-in-out;
+}
+.flight-controls button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.flight-controls button:active{
+    transform: translateY(1px);
+}
+.toolbar-close:hover{
+    cursor: pointer;
+    transform: scale(0.9);
 }
 .map-select{
     position: absolute;
@@ -179,34 +286,6 @@ button.mapInput:active {
 .mapchoice{
     padding: 5px 3px;
     margin-top: 3px;
-}
-.map-label{
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px;
-    color: white;
-    background-color: #333;
-    border-radius: 16px;
-}
-.flightSpeed{
-    width: 50%;
-    display: inline;
-    font-size: 20px;
-}
-.convertspeed{
-    border-radius: 16px;
-    margin-left: auto;
-    cursor: pointer;
-    color: #fff;
-    background-color: #CB2027;
-    border: none;
-    box-shadow: 1px 1px #999;
-}
-.convertspeed:hover{
-    background-color: #c46265;
-}
-.convertspeed:active{
-    transform: translateY(4px);
 }
 .main-container{
     width: 100%;
@@ -300,15 +379,15 @@ button.mapInput:active {
     .nav-link.active{
         display: flex;
     }
-    button.mapInput{
+    button.map-input{
         cursor: pointer;
         height: 75px;
         width: 75px;
         border-radius: 10px;
     }
     .input-container{
-        height: 145px;
-        bottom: 10px;
+        height: 100vh;
+        padding-top: 5px;
     }
     .container{
         height: 100px;
@@ -324,7 +403,7 @@ button.mapInput:active {
         width: 100px;
     }
     .input-container .map-label{
-        width: 225px;
+        width: 100%;
         font-size: 18px;
     }
     .map-select{
@@ -333,10 +412,6 @@ button.mapInput:active {
         height: 65px;
         width: 160px;
         top: 65px;
-    }
-    .flightSpeed{
-        width: 75px;
-        margin-left: 5px;
     }
     .contact-form{
         max-width: 400px;
@@ -365,16 +440,14 @@ button.mapInput:active {
     .content-title{
         font-size: 50px;
     }
-    button.mapInput{
+    button.map-input{
         cursor: pointer;
         height: 55px;
         width: 55px;
         border-radius: 10px;
     }
-    .input-container{
-        display: flex;
-        flex-wrap: wrap;
-        height: 100px;
+    .toolbar-btn{
+        right: 50px;
     }
     .container{
         height: 75px;
@@ -385,16 +458,12 @@ button.mapInput:active {
         font-size: 1.1em;
     }
     .map-label{
-        font-size: 14px;
-        padding-bottom: 5px;
-        width: 70px;
-        height: 85px;
+        width: 100%;
     }
-    .input-container .map-label{
+    .map-label input{
         width: 100px;
-        height: 90px;
-        font-size: 10px;
-        padding: 3px;
+        height: 25px;
+        font-size: 20px;
     }
     .map-select{
         border-radius: 10px;
@@ -404,7 +473,7 @@ button.mapInput:active {
         top: 50px;
         left: 70px;
     }
-    .flightSpeed{
+    .flight-speed{
         width: 50px;
         font-size: 12px;
     }
@@ -415,16 +484,57 @@ button.mapInput:active {
         color: #fff;
         font-size: 75px;
     }
+    .input-container.active{
+        width: 200px;
+    }
+    .input-tools{
+        margin: 10px 0;
+        padding: 5px 0;
+    }
+    .input-btns{
+        padding: 20px 0;
+    }
+    .accept-flight button{
+        font-size: 25px;
+        height: 40px;
+        width: 40px;
+    }
+    .map-label label{
+        font-size: 15px;
+    }
 }
 @media (max-width:360px) {
-    .input-container .map-label{
-        width: 75px;
-        height: 80px;
-        font-size: 9px;
-        padding: 1px;
+    .input-container.active{
+        width: 165px;
+        height: 100%;
+    }
+    .input-tools{
+        font-size: 15px;
+        width: 155px;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+    }
+    .input-btns{
+        padding: 15px 0;
+    }
+    .flight-controls{
+        margin-bottom: 0;
+        height: 140px;
+    }
+    .flight-controls h2{
+        font-size: 15px;
+    }
+    .accept-flight button{
+        font-size: 15px;
+        height: 30px;
+        width: 30px;
     }
     .logo{
         width: 280px;
         padding: 0;
+    }
+    .map-label{
+        text-align: center;
     }
 }

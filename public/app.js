@@ -225,15 +225,19 @@ switch(currentPage){
 function flightPlanner(mapSettings,mapIcons,waypointIcons){
     //HTML Elements
     const button = document.querySelector('.recenter-btn');
-    const speedInput = document.querySelector('.flightSpeed');
+    const speedInput = document.querySelector('.flight-speed');
     const mapChoice = document.querySelector('.mapchoice');
     const newFlight = document.querySelector('.newflight');
     const clearFlight = document.querySelector('.clearflight')
     const waypointSelector = document.querySelector('.waypointicon')
+    const currIcon =  document.querySelector('.waypoint-icon');
     const mapSelectDiv = document.querySelector('.map-select')
     const inputContainer = document.querySelector('.input-container')
     const convertSpeed = document.querySelector('.convertspeed')
     const speedLabel = document.querySelector('.speed-label');
+    const openToolbar = document.querySelector('.toolbar-btn');
+    const closeToolbar = document.querySelector('.toolbar-close');
+    const confirmFlight = document.querySelector('#confirm-flight');
 
     //Gets Map Object Settings based on Map choice value
     function findMap(obj,hash){
@@ -342,6 +346,14 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     button.addEventListener('click', () => {
         map.setView(mapIndex.mapCenter,mapIndex.defaultZoom)
     })
+    //Opens toolbar
+    openToolbar.addEventListener('click',() => {
+        inputContainer.classList.add('active')
+    })
+    //Closes toolbar
+    closeToolbar.addEventListener('click',() => {
+        inputContainer.classList.remove('active')
+    })
     //Toggles hamburger nav icon
     toggleBtn.addEventListener('click',() => {
         navLinks.classList.toggle('active');
@@ -387,7 +399,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     let count = 1
     //Swaps through waypoints till selected
     waypointSelector.addEventListener('click',() =>{
-        waypointSelector.style.backgroundImage = `url(${waypointIcons[count]})`
+        currIcon.style.backgroundImage = `url(${waypointIcons[count]})`
         waypointMarker = waypointIcons[count]
         count++
         if(count === waypointIcons.length){
@@ -415,7 +427,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
                 lng: e.latlng.lng,
             }
             markerCoords.push(marker);
-            //console.log(markerCoords);
+            console.log(markerCoords);
             //Adds a polyline to connect each point
             const polyline = L.polyline(markerCoords, {color: 'red',weight: '3',dashArray: '20,20'});
             //Adds marker and point to our FlightPlan
@@ -738,5 +750,5 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
         'Frontline':frontlineLayer
     }
     //Adds our layers to the map
-    L.control.layers(null,overlay).addTo(map);
+    L.control.layers(null,overlay,{position:'bottomleft'}).addTo(map);
 }
