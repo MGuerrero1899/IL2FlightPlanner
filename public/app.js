@@ -238,6 +238,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     const openToolbar = document.querySelector('.toolbar-btn');
     const closeToolbar = document.querySelector('.toolbar-close');
     const confirmFlight = document.querySelector('#confirm-flight');
+    const confirmContainer = document.querySelector('.flight-controls')
 
     //Gets Map Object Settings based on Map choice value
     function findMap(obj,hash){
@@ -381,22 +382,36 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     })
     //Creates new flight
     newFlight.addEventListener('click',() => {
+        isFlightConfirmed = false;
+        confirmContainer.classList.add('active');
         createFlightPlan()
     })
     //Clears flight
     clearFlight.addEventListener('click',()=> {
         clearFlightPlan()
     })
+    //Confirms flight
+    confirmFlight.addEventListener('click', () => {
+        markerCoords = [];
+        speed = [];
+        speedInput.value = 300;
+        isFlightConfirmed = true;
+        confirmContainer.classList.remove('active');
+    })
+    //Bool if flight has been confirmed finished or not
+    let isFlightConfirmed = false;
+    //Array of speed for each marker (Fixes issue of all markers being assigned same speed)
+    let speed = [];
     //Array of marker coordinates
-    let markerCoords = []
+    let markerCoords = [];
     //Array of server markers
-    let serverMarkers = []
+    let serverMarkers = [];
     //Array of frontline coords
-    let blueFrontline = []
-    let redFrontline = []
+    let blueFrontline = [];
+    let redFrontline = [];
     //Sets Default Waypoint Marker
     let waypointMarker = waypointIcons[0];
-    let count = 1
+    let count = 1;
     //Swaps through waypoints till selected
     waypointSelector.addEventListener('click',() =>{
         currIcon.style.backgroundImage = `url(${waypointIcons[count]})`
@@ -412,8 +427,16 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     function createFlightPlan(){
         //Creates marker based on clicked location of map
         map.on('click',(e) => {
+            //If new flight hasnt been started exit
+            if(isFlightConfirmed){
+                return
+            }
             //Declares speed as speedInput value (Default value is 300kmph)
-            let speed = speedInput.value;
+            let currSpeed = speedInput.value
+            speedInput.addEventListener('change',() => {
+                currSpeed = speedInput.value
+            })
+            speed.push(currSpeed)
             //Creates marker object and pushes it to the marker coordinates array
             let point = new L.marker(e.latlng,{
                 icon: L.icon({
@@ -427,7 +450,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
                 lng: e.latlng.lng,
             }
             markerCoords.push(marker);
-            console.log(markerCoords);
+            //console.log(markerCoords);
             //Adds a polyline to connect each point
             const polyline = L.polyline(markerCoords, {color: 'red',weight: '3',dashArray: '20,20'});
             //Adds marker and point to our FlightPlan
@@ -442,9 +465,9 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
                     let midpoint = calcMidPoint(a,b);
                     let heading = calcHeading(a,b);
                     let distance = calcDistance(a,b);
-                    let time = calcTime(speed,distance);
+                    let time = calcTime(speed[i+1],distance);
                     //if time is less than 1 min will display in seconds
-                    let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed}${speedMeasurement}`;
+                    let timeToTarget = time < .6 ? `${time*100}sec` : `${time.toFixed(0)} min|${speed[i+1]}${speedMeasurement}`;
                     let label = `${heading}°|${distance}km|${timeToTarget}`
                     if(isImperial()){
                         label = `${heading}°|${(distance * 0.62).toFixed(2)}mi|${timeToTarget}`

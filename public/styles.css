@@ -69,6 +69,8 @@ html{
 
 .nav-link li a:hover{
     top: -5px;
+    text-decoration: underline 1px white;
+    text-underline-offset: 2px;
 }
 
 .container{
@@ -201,7 +203,7 @@ html{
     margin-left: auto;
     cursor: pointer;
     color: white;
-    background-color: red;
+    background-color: #c90b0b;
     border: none;
     transition: all .2s;
 }
@@ -236,13 +238,23 @@ html{
 .toolbar-close{
     margin-left: 20px;
     margin-top: 10px;
-    color: red;
+    color: #c90b0b;
     font-size: 30px;
-    transition: transform .5s;
+    transition: 1s;
 }
 .flight-controls{
     margin-bottom: 100px;
+    display: none;
 }
+.flight-controls.active{
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
 .accept-flight{
     display: flex;
     flex-direction: column;
@@ -269,7 +281,7 @@ html{
 }
 .toolbar-close:hover{
     cursor: pointer;
-    transform: scale(0.9);
+    transform: scale(.95);
 }
 .map-select{
     position: absolute;
