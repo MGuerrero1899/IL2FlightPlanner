@@ -498,6 +498,8 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
     //Clears flight plan on button push
     function clearFlightPlan(){
         markerCoords = []
+        speed = [];
+        speedInput.value = 300;
         flightPlan.clearLayers()
     }
     //Calculates MidPoint between two map points
