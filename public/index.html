@@ -20,7 +20,7 @@
     <link rel="manifest" href="/site.webmanifest">
 =======
     <meta name="description" content="Plan and map a flight plan for IL-2 Great Battles.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <meta name="keywords" content="il2,bos,il2 bos,il-2,battle of stalingrad,il2 bom,bom,battle of moscow,mission planner, il2 bobp,il2 battle of kuban">
     <link rel="icon" href="./favicon.png">
 >>>>>>> e9631cc364e565d81794fe77bbaa6e3a80f27781
@@ -30,6 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
@@ -56,7 +57,7 @@
         <div class="map-select">
             <label for="mapchoice" class="map-label">
                 Select A Map
-                <select name="mapchoice" id="mapchoice" class="mapchoice mapInput">
+                <select name="mapchoice" id="mapchoice" class="mapchoice">
                     <option value="#stalingrad">Stalingrad</option>
                     <option value="#kuban">Kuban</option>
                     <option value="#moscow">Moscow</option>
@@ -68,19 +69,46 @@
                 </select>
             </label>
         </div>
-            <div class="input-container">
-                    <button class="recenter-btn mapInput"></button>
-                    <button class="newflight mapInput"></button>
-                    <button class="clearflight mapInput"></button>
-                    <button class="waypointicon mapInput"></button>
+        <div class="toolbar-btn">
+            <span class="fas fa-plane"></span>
+        </div>
+        <div class="input-container">
+            <div class="toolbar-close">
+                <span class="fas fa-times"></span>
+            </div>
+            <h2>Tools</h2>
+                <div class="input-btns">
+                    <div class="input-tools">
+                        <span class="far fa-plus-square"></span>
+                        <button class="recenter-btn map-input">Recenter</button>
+                    </div>
+                    <div class="input-tools">
+                        <span class="fas fa-map-marker-alt"></span>
+                        <button class="newflight map-input">New Flight</button>
+                    </div>
+                    <div class="input-tools">
+                        <span class="fas fa-ban"></span>
+                        <button class="clearflight map-input">Clear Flight</button>
+                    </div>
+                    <div class="input-tools">
+                        <span class="waypoint-icon"></span>
+                        <button class="waypointicon map-input">Waypoint Icon</button>
+                    </div>
                     <div class="map-label">
-                        <label for="flightSpeed">
+                        <label for="flight-speed">
                             <span class="speed-label">Current Airspeed (km/h)</span>
                         </label>
-                        <input type="number" value='300' id="flightSpeed" class="flightSpeed mapInput">
+                        <input type="number" value='300' id="flightSpeed" class="flight-speed">
                         <button class="convertspeed">MPH</button>
                     </div>
-            </div>
+                </div>
+                <div class="flight-controls">
+                    <h2>Confirm Flight</h2>
+                    <div class="accept-flight">
+                        <button class="fas fa-check" id="confirm-flight"></button>
+                    </div>
+                </div>
+        </div>
     </div>
     </div>
 
