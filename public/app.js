@@ -565,7 +565,7 @@ function flightPlanner(mapSettings,mapIcons,waypointIcons){
 
     //fetches server json
     async function fetchData(){
-        const res = await fetch ('https://pacific-eyrie-84854.herokuapp.com/http://stats.virtualpilots.fi:8000/static/output.json');
+        const res = await fetch ('https://floating-waters-40743-66e45523c153.herokuapp.com/http://stats.virtualpilots.fi:8000/static/output.json');
         const data = await res.json();
         return data
     }
